@@ -1,0 +1,2433 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Day Awareness: Cyber & AI Challenge</title>
+<!-- Tailwind CSS for utility layout -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Google Fonts: Orbitron, Fredoka, Luckiest Guy & Rajdhani -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Luckiest+Guy&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        cyber: ['Orbitron', 'sans-serif'],
+        wacky: ['"Luckiest Guy"', 'cursive'],
+        bubble: ['Fredoka', 'sans-serif'],
+        tech: ['Rajdhani', 'sans-serif'],
+        body: ['Nunito', 'sans-serif']
+      },
+      colors: {
+        neonCyan: '#00f7ff',
+        electricAqua: '#05e6b7',
+        cyberBlue: '#0088ff',
+        cyberPink: '#ff1493',
+        neonYellow: '#ffe600',
+        neonGreen: '#10f055',
+        deepCircuit: '#030c24',
+        holoBg: 'rgba(5, 17, 43, 0.78)'
+      }
+    }
+  }
+}
+</script>
+
+<style>
+:root {
+  --neon-cyan: #00f7ff;
+  --cyber-pink: #ff1493;
+  --neon-yellow: #ffe600;
+  --electric-aqua: #05e6b7;
+  --neon-green: #10f055;
+  --sky-blue-base: #00b4d8;
+}
+
+body {
+  font-family: 'Fredoka', 'Rajdhani', sans-serif;
+  background-color: #0284c7;
+  background: 
+    radial-gradient(ellipse at 50% 50%, #38bdf8 0%, #0284c7 35%, #0369a1 70%, #082f49 100%),
+    radial-gradient(circle at 15% 85%, rgba(255, 20, 147, 0.28) 0%, transparent 45%),
+    radial-gradient(circle at 85% 15%, rgba(0, 247, 255, 0.45) 0%, transparent 50%);
+  min-height: 100vh;
+  color: #ffffff;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Sky Blue Circuit Board Base Grid */
+.circuit-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.45;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.16) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.16) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+/* Glowing Circuit Trace Overlay & Nodes */
+.circuit-traces {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.7;
+  background-image:
+    radial-gradient(circle at 18px 18px, #00f7ff 2.5px, transparent 3px),
+    radial-gradient(circle at 90px 90px, #ffffff 3px, transparent 3.5px),
+    radial-gradient(circle at 144px 54px, #ffe600 2.5px, transparent 3px);
+  background-size: 144px 144px;
+}
+
+/* Pulsing Circuit Path SVG Layer */
+.circuit-svg-layer {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.65;
+}
+
+@keyframes dashPulse {
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+
+.circuit-path-pulse {
+  stroke-dasharray: 12, 18;
+  animation: dashPulse 2.8s linear infinite;
+}
+
+/* Central Luminous Neural Brain Backdrop Animations */
+@keyframes brainPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 0 25px rgba(0, 247, 255, 0.85)) drop-shadow(0 0 50px rgba(255, 20, 147, 0.5));
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.08);
+    filter: drop-shadow(0 0 45px rgba(0, 247, 255, 1)) drop-shadow(0 0 75px rgba(5, 230, 183, 0.85));
+  }
+}
+
+@keyframes lightBurstRotate {
+  0% { transform: translate(-50%, -50%) rotate(0deg); opacity: 0.5; }
+  50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.15); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) rotate(360deg); opacity: 0.5; }
+}
+
+@keyframes sparkFloat {
+  0% { transform: translateY(0) scale(0.8); opacity: 0.3; }
+  50% { transform: translateY(-25px) scale(1.2); opacity: 0.9; }
+  100% { transform: translateY(-50px) scale(0.8); opacity: 0.2; }
+}
+
+.anim-brain-core {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  animation: brainPulse 4.5s ease-in-out infinite;
+}
+
+.anim-burst-rays {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  animation: lightBurstRotate 28s linear infinite;
+}
+
+.spark-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff, #00f7ff);
+  box-shadow: 0 0 12px #00f7ff;
+  animation: sparkFloat 3.5s ease-in-out infinite alternate;
+}
+
+/* Cyber Title & Glows */
+.cyber-glow-title {
+  font-family: 'Luckiest Guy', cursive;
+  text-shadow: 
+    0 0 15px rgba(0, 247, 255, 0.95),
+    3px 3px 0 #ff1493,
+    6px 6px 0 #002b66;
+  letter-spacing: 2px;
+}
+
+.sub-glow {
+  text-shadow: 0 0 12px #00f7ff, 0 0 25px rgba(0, 247, 255, 0.6);
+}
+
+/* Hologram Glass Box updated with Deep Contrast for Sky Blue */
+.holo-box {
+  background: rgba(3, 20, 52, 0.85);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 2.5px solid rgba(0, 247, 255, 0.85);
+  box-shadow: 
+    0 0 28px rgba(0, 247, 255, 0.35),
+    inset 0 0 22px rgba(0, 247, 255, 0.15),
+    0 14px 34px rgba(2, 44, 91, 0.65);
+  border-radius: 28px;
+  position: relative;
+}
+
+.holo-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #00f7ff, #ffffff, #ff1493, transparent);
+  border-radius: 999px;
+  box-shadow: 0 0 14px #00f7ff;
+}
+
+/* Cyber Jelly Buttons */
+.cyber-btn {
+  font-family: 'Luckiest Guy', cursive;
+  letter-spacing: 1.2px;
+  border-radius: 20px;
+  border: 3px solid #000;
+  box-shadow: 0 6px 0 #000, 0 0 15px rgba(0, 247, 255, 0.4);
+  transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+.cyber-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 9px 0 #000, 0 0 24px rgba(0, 247, 255, 0.7);
+}
+.cyber-btn:active {
+  transform: translateY(4px) scale(0.98);
+  box-shadow: 0 2px 0 #000;
+}
+.cyber-btn:disabled {
+  opacity: 0.45;
+  transform: none !important;
+  box-shadow: 0 4px 0 #000 !important;
+  cursor: not-allowed;
+}
+
+/* ================= ANIMATED FLYING SPRITES ================= */
+.flying-sprite {
+  position: fixed;
+  z-index: 15;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  user-select: none;
+}
+.flying-sprite:hover {
+  transform: scale(1.28) !important;
+  z-index: 40;
+}
+
+/* Wing flapper animation */
+@keyframes wingFlap {
+  0%, 100% { transform: rotate(0deg) scaleY(1); }
+  50% { transform: rotate(26deg) scaleY(0.7); }
+}
+.wing-left {
+  transform-origin: 90% 80%;
+  animation: wingFlap 0.18s infinite ease-in-out alternate;
+}
+.wing-right {
+  transform-origin: 10% 80%;
+  animation: wingFlap 0.18s infinite ease-in-out alternate-reverse;
+}
+
+/* Jet Thruster Fire */
+@keyframes jetPulse {
+  0%, 100% { transform: scale(1, 1); opacity: 0.9; }
+  50% { transform: scale(1.3, 1.6); opacity: 1; filter: drop-shadow(0 0 10px #ffe600); }
+}
+.jet-flame {
+  animation: jetPulse 0.15s infinite alternate;
+}
+
+/* Path 1: Winged Jet Drone swooping across top right */
+@keyframes flyWingedDrone {
+  0% { transform: translate(-20px, 0px) rotate(-4deg); }
+  35% { transform: translate(35px, -24px) rotate(6deg); }
+  70% { transform: translate(15px, 18px) rotate(-2deg); }
+  100% { transform: translate(-20px, 0px) rotate(-4deg); }
+}
+.anim-winged-drone {
+  animation: flyWingedDrone 8s ease-in-out infinite;
+}
+
+/* Path 2: Cyber Bee Bobbing and Zigzagging */
+@keyframes flyBeeZigZag {
+  0% { transform: translate(0px, 0px) rotate(0deg); }
+  25% { transform: translate(25px, -20px) rotate(10deg); }
+  50% { transform: translate(45px, 15px) rotate(-8deg); }
+  75% { transform: translate(15px, -12px) rotate(5deg); }
+  100% { transform: translate(0px, 0px) rotate(0deg); }
+}
+.anim-cyber-bee {
+  animation: flyBeeZigZag 5.5s ease-in-out infinite;
+}
+
+/* Path 3: Spider Bot crawling / bobbing along side */
+@keyframes spiderPatrol {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(4deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+.anim-spider-patrol {
+  animation: spiderPatrol 4.2s ease-in-out infinite;
+}
+
+/* Path 4: Spherical Orb Bot floating in place */
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0px) rotate(-5deg); }
+  50% { transform: translateY(-18px) rotate(5deg) scale(1.05); }
+}
+.anim-orb-float {
+  animation: orbFloat 4s ease-in-out infinite;
+}
+
+/* Path 5: Floating Energy Shards */
+@keyframes shardDrift {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-25px) rotate(18deg) scale(1.1); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+.anim-shard {
+  animation: shardDrift 6s ease-in-out infinite;
+}
+
+/* Central Neon Brain Pulsing in Background */
+@keyframes brainPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 15px rgba(0, 247, 255, 0.7)) drop-shadow(0 0 35px rgba(255, 20, 147, 0.5));
+  }
+  50% {
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 30px rgba(0, 247, 255, 0.95)) drop-shadow(0 0 50px rgba(5, 230, 183, 0.8));
+  }
+}
+.anim-brain-glow {
+  animation: brainPulse 3.8s ease-in-out infinite;
+}
+
+/* Light rays from brain */
+@keyframes lightRaySweep {
+  0% { transform: rotate(0deg) scale(1); opacity: 0.35; }
+  50% { transform: rotate(180deg) scale(1.18); opacity: 0.6; }
+  100% { transform: rotate(360deg) scale(1); opacity: 0.35; }
+}
+.anim-light-rays {
+  animation: lightRaySweep 25s linear infinite;
+}
+
+/* Interactive Speech Bubble for Sprites */
+.sprite-speech {
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #02122b;
+  color: #00f7ff;
+  border: 2px solid #00f7ff;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 14px;
+  box-shadow: 0 0 16px rgba(0, 247, 255, 0.5), 0 6px 0 #000;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 50;
+}
+.sprite-speech::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: #00f7ff transparent transparent transparent;
+}
+.flying-sprite:hover .sprite-speech,
+.flying-sprite.talking .sprite-speech {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-6px);
+}
+
+/* Confetti Canvas */
+#confettiCanvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99;
+}
+
+/* Matrix Binary Streams Overlay */
+.binary-column {
+  position: absolute;
+  font-family: monospace;
+  font-size: 10px;
+  color: rgba(0, 247, 255, 0.22);
+  line-height: 12px;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+@keyframes shakeError {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-10px) rotate(-4deg); }
+  40%, 80% { transform: translateX(10px) rotate(4deg); }
+}
+.shake-anim { animation: shakeError 0.4s ease-in-out; }
+
+/* ================= PROMPT TRACE PAGES ================= */
+.trace-page {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.trace-heading {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 14px rgba(0,247,255,.65), 3px 3px 0 #06142e;
+  letter-spacing: .04em;
+}
+.trace-subtitle {
+  color: #d8f7ff;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+}
+.trace-step {
+  min-height: 220px;
+  background: rgba(3,20,52,.88);
+  border: 2.5px solid var(--neon-cyan);
+  border-radius: 26px;
+  box-shadow: 7px 8px 0 #020817, 0 0 22px rgba(0,247,255,.2), inset 0 0 18px rgba(0,247,255,.08);
+  padding: 25px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.trace-step.trace-pink { border-color: var(--cyber-pink); }
+.trace-step.trace-green { border-color: var(--electric-aqua); }
+.trace-step.trace-yellow { border-color: var(--neon-yellow); }
+.trace-number {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #03132b;
+  background: var(--neon-cyan);
+  border: 2px solid #fff;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 18px;
+  margin-bottom: 15px;
+  box-shadow: 0 0 15px rgba(0,247,255,.55);
+}
+.trace-step h3 {
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(13px, 1.4vw, 17px);
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+.trace-step p {
+  color: #c9e8ff;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 800;
+  max-width: 240px;
+}
+.trace-arrow {
+  color: var(--cyber-pink);
+  font-size: 30px;
+  font-weight: 900;
+  text-shadow: 0 0 12px rgba(255,20,147,.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.trace-note {
+  border: 2px solid var(--neon-cyan);
+  border-radius: 22px;
+  background: rgba(3,20,52,.78);
+  box-shadow: 0 0 22px rgba(0,247,255,.15), inset 0 0 16px rgba(0,247,255,.07);
+  padding: 20px 24px;
+  text-align: center;
+}
+.trace-art {
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.trace-art svg { width: min(100%, 260px); height: auto; filter: drop-shadow(0 0 18px rgba(0,247,255,.4)); }
+@media (max-width: 767px) {
+  .trace-step { min-height: 155px; padding: 18px 14px; }
+  .trace-art { min-height: 150px; }
+  .trace-arrow { transform: rotate(90deg); font-size: 24px; }
+}
+
+</style>
+</head>
+
+<body class="p-2 sm:p-5 flex flex-col justify-between select-none">
+
+<!-- Background Layers -->
+<div class="circuit-bg"></div>
+<div class="circuit-traces"></div>
+
+<!-- Sky Blue Neon Circuit Traces Interactive Vector Layer -->
+<svg class="circuit-svg-layer" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="neonGlowCyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Left & Upper Circuit Traces -->
+  <g stroke="#00f7ff" stroke-width="2.5" fill="none" opacity="0.7" filter="url(#neonGlowCyan)">
+    <path d="M 0,120 L 90,120 L 140,170 L 140,320 L 220,400" />
+    <path d="M 0,260 L 60,260 L 110,310 L 110,500 L 40,570" />
+    <path d="M 0,480 L 80,480 L 130,530 L 190,530" />
+    <path d="M 180,0 L 180,75 L 240,135 L 240,210" />
+    <circle cx="140" cy="170" r="4.5" fill="#ffffff" stroke="#00f7ff" stroke-width="2" />
+    <circle cx="220" cy="400" r="5.5" fill="#ffe600" />
+    <circle cx="110" cy="310" r="4.5" fill="#00f7ff" />
+    <circle cx="190" cy="530" r="5" fill="#ff1493" />
+    <circle cx="240" cy="135" r="4" fill="#05e6b7" />
+  </g>
+
+  <!-- Right & Lower Circuit Traces -->
+  <g stroke="#ffffff" stroke-width="2.5" fill="none" opacity="0.7" filter="url(#neonGlowCyan)">
+    <path d="M 100%,150 L calc(100% - 100px),150 L calc(100% - 160px),210 L calc(100% - 160px),380 L calc(100% - 240px),460" />
+    <path d="M 100%,320 L calc(100% - 70px),320 L calc(100% - 130px),380 L calc(100% - 130px),600" />
+    <path d="M calc(100% - 200px),0 L calc(100% - 200px),80 L calc(100% - 280px),160" />
+    <circle cx="calc(100% - 160px)" cy="210" r="5" fill="#00f7ff" />
+    <circle cx="calc(100% - 240px)" cy="460" r="5.5" fill="#ffe600" />
+    <circle cx="calc(100% - 130px)" cy="380" r="4.5" fill="#ff1493" />
+    <circle cx="calc(100% - 280px)" cy="160" r="4.5" fill="#05e6b7" />
+  </g>
+
+  <!-- Animated Glowing Energy Pulse Streams -->
+  <path class="circuit-path-pulse" d="M 0,120 L 90,120 L 140,170 L 140,320 L 220,400" stroke="#ffffff" stroke-width="3" fill="none" />
+  <path class="circuit-path-pulse" d="M 100%,150 L calc(100% - 100px),150 L calc(100% - 160px),210 L calc(100% - 160px),380 L calc(100% - 240px),460" stroke="#00f7ff" stroke-width="3" fill="none" />
+</svg>
+
+<!-- ================= LUMINOUS CIRCUIT BRAIN & RADIANT ENERGY BURST (ARTWORK BACKDROP) ================= -->
+<!-- Radiant Light Rays & Starburst Emanating from the Brain -->
+<svg class="anim-burst-rays w-[700px] h-[700px] md:w-[980px] md:h-[980px]" viewBox="0 0 500 500">
+  <defs>
+    <radialGradient id="burstRayGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="25%" stop-color="#00f7ff" stop-opacity="0.7"/>
+      <stop offset="50%" stop-color="#05e6b7" stop-opacity="0.45"/>
+      <stop offset="75%" stop-color="#ff1493" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="beamA" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f7ff" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ff1493" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g stroke="url(#burstRayGrad)" stroke-width="2.2" opacity="0.75">
+    <line x1="250" y1="250" x2="20" y2="20" />
+    <line x1="250" y1="250" x2="480" y2="20" />
+    <line x1="250" y1="250" x2="20" y2="480" />
+    <line x1="250" y1="250" x2="480" y2="480" />
+    <line x1="250" y1="250" x2="250" y2="5" />
+    <line x1="250" y1="250" x2="250" y2="495" />
+    <line x1="250" y1="250" x2="5" y2="250" />
+    <line x1="250" y1="250" x2="495" y2="250" />
+    <line x1="250" y1="250" x2="80" y2="120" />
+    <line x1="250" y1="250" x2="420" y2="120" />
+    <line x1="250" y1="250" x2="80" y2="380" />
+    <line x1="250" y1="250" x2="420" y2="380" />
+    <line x1="250" y1="250" x2="140" y2="50" />
+    <line x1="250" y1="250" x2="360" y2="50" />
+  </g>
+  <circle cx="250" cy="250" r="160" fill="none" stroke="url(#burstRayGrad)" stroke-width="1.5" stroke-dasharray="10 8" opacity="0.6"/>
+  <circle cx="250" cy="250" r="220" fill="none" stroke="url(#beamA)" stroke-width="1" stroke-dasharray="4 6" opacity="0.4"/>
+</svg>
+
+<!-- Central Glowing Holographic Neural Brain (Exactly Matched to Theme Art) -->
+<div class="anim-brain-core w-[320px] h-[260px] md:w-[480px] md:h-[390px] flex items-center justify-center">
+  <svg viewBox="0 0 320 260" class="w-full h-full filter drop-shadow-[0_0_35px_#00f7ff]">
+    <defs>
+      <linearGradient id="brainArtGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="25%" stop-color="#00f7ff"/>
+        <stop offset="65%" stop-color="#05e6b7"/>
+        <stop offset="100%" stop-color="#ff1493"/>
+      </linearGradient>
+      <radialGradient id="brainCoreGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+        <stop offset="35%" stop-color="#00f7ff" stop-opacity="0.75"/>
+        <stop offset="70%" stop-color="#05e6b7" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#0284c7" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="ultraGlow" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="5" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+
+    <!-- Ambient Core Glow -->
+    <ellipse cx="160" cy="130" rx="130" ry="90" fill="url(#brainCoreGlow)" opacity="0.55" filter="url(#ultraGlow)"/>
+
+    <!-- Left Hemisphere Outer Silhouette & Gyri -->
+    <path d="M160,40 C120,38 80,55 60,85 C40,115 42,150 55,180 C70,210 100,225 135,225 C148,225 156,220 160,210" 
+          fill="none" stroke="url(#brainArtGrad)" stroke-width="4.5" stroke-linecap="round" />
+    <!-- Right Hemisphere Outer Silhouette & Gyri -->
+    <path d="M160,40 C200,38 240,55 260,85 C280,115 278,150 265,180 C250,210 220,225 185,225 C172,225 164,220 160,210" 
+          fill="none" stroke="url(#brainArtGrad)" stroke-width="4.5" stroke-linecap="round" />
+
+    <!-- Central Sulcus Divider -->
+    <path d="M160,40 Q155,90 160,130 Q165,170 160,210" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.9"/>
+
+    <!-- Left Hemisphere Neural Convolutions & Circuits -->
+    <path d="M80,85 Q115,70 135,95 T100,140 Q85,160 125,175" fill="none" stroke="#00f7ff" stroke-width="3" opacity="0.85"/>
+    <path d="M65,130 Q95,120 120,135 T145,160" fill="none" stroke="#05e6b7" stroke-width="2.8" opacity="0.8"/>
+    <path d="M90,185 Q115,195 140,185" fill="none" stroke="#ff1493" stroke-width="2.5" opacity="0.75"/>
+
+    <!-- Right Hemisphere Neural Convolutions & Circuits -->
+    <path d="M240,85 Q205,70 185,95 T220,140 Q235,160 195,175" fill="none" stroke="#00f7ff" stroke-width="3" opacity="0.85"/>
+    <path d="M255,130 Q225,120 200,135 T175,160" fill="none" stroke="#05e6b7" stroke-width="2.8" opacity="0.8"/>
+    <path d="M230,185 Q205,195 180,185" fill="none" stroke="#ff1493" stroke-width="2.5" opacity="0.75"/>
+
+    <!-- Illuminated Neural Junction Nodes (Synapses) -->
+    <circle cx="135" cy="95" r="5" fill="#ffffff" stroke="#00f7ff" stroke-width="2"/>
+    <circle cx="185" cy="95" r="5" fill="#ffffff" stroke="#00f7ff" stroke-width="2"/>
+    <circle cx="100" cy="140" r="4.5" fill="#ffe600"/>
+    <circle cx="220" cy="140" r="4.5" fill="#ffe600"/>
+    <circle cx="160" cy="130" r="7" fill="#ffffff" class="filter drop-shadow-[0_0_10px_#ffffff]"/>
+    <circle cx="125" cy="175" r="4.5" fill="#ff1493"/>
+    <circle cx="195" cy="175" r="4.5" fill="#00f7ff"/>
+    <circle cx="160" cy="65" r="4" fill="#05e6b7"/>
+    <circle cx="160" cy="195" r="4" fill="#ffe600"/>
+  </svg>
+</div>
+
+<!-- Floating Particle Sparks -->
+<div class="spark-particle w-3 h-3 hidden md:block" style="top: 38%; left: 34%; animation-delay: 0.2s;"></div>
+<div class="spark-particle w-2.5 h-2.5 hidden md:block" style="top: 56%; right: 35%; animation-delay: 1.1s;"></div>
+<div class="spark-particle w-3 h-3 hidden md:block" style="top: 62%; left: 42%; animation-delay: 1.8s;"></div>
+<div class="spark-particle w-2 h-2 hidden md:block" style="top: 32%; right: 41%; animation-delay: 2.3s;"></div>
+
+<canvas id="confettiCanvas"></canvas>
+
+<!-- Matrix Binary Streams (Decorative) -->
+<div class="binary-column hidden lg:block" style="top: 10%; left: 3%;">01010110<br>10010101<br>01110010<br>11001101<br>00101011<br>11101001</div>
+<div class="binary-column hidden lg:block" style="top: 25%; right: 4%;">11001001<br>00101110<br>10110101<br>01001011<br>11010010<br>00110110</div>
+<div class="binary-column hidden lg:block" style="bottom: 15%; left: 4%;">01101010<br>11010101<br>00101100<br>11011101</div>
+<div class="binary-column hidden lg:block" style="bottom: 12%; right: 5%;">10101100<br>01011011<br>11001010<br>00110101</div>
+
+<!-- ================= CENTRAL NEON HOLOGRAPHIC BRAIN (IN BACKGROUND) ================= -->
+<div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0 opacity-40 md:opacity-55 flex items-center justify-center">
+  <!-- Glowing Light Ray Starburst -->
+  <svg class="anim-light-rays w-[560px] h-[560px] md:w-[720px] md:h-[720px] absolute" viewBox="0 0 400 400">
+    <defs>
+      <radialGradient id="rayGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#00f7ff" stop-opacity="0.8"/>
+        <stop offset="40%" stop-color="#05e6b7" stop-opacity="0.4"/>
+        <stop offset="70%" stop-color="#ff1493" stop-opacity="0.2"/>
+        <stop offset="100%" stop-color="#030a1c" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <g stroke="url(#rayGrad)" stroke-width="1.8">
+      <line x1="200" y1="200" x2="20" y2="20" />
+      <line x1="200" y1="200" x2="380" y2="20" />
+      <line x1="200" y1="200" x2="20" y2="380" />
+      <line x1="200" y1="200" x2="380" y2="380" />
+      <line x1="200" y1="200" x2="200" y2="10" />
+      <line x1="200" y1="200" x2="200" y2="390" />
+      <line x1="200" y1="200" x2="10" y2="200" />
+      <line x1="200" y1="200" x2="390" y2="200" />
+      <line x1="200" y1="200" x2="60" y2="100" />
+      <line x1="200" y1="200" x2="340" y2="100" />
+      <line x1="200" y1="200" x2="60" y2="300" />
+      <line x1="200" y1="200" x2="340" y2="300" />
+    </g>
+  </svg>
+
+  <!-- Glowing Cyber Brain Vector -->
+  <div class="anim-brain-glow relative w-56 h-48 md:w-80 md:h-64 flex items-center justify-center">
+    <svg viewBox="0 0 240 180" class="w-full h-full filter drop-shadow-[0_0_20px_#00f7ff]">
+      <defs>
+        <linearGradient id="brainNeon" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#00f7ff"/>
+          <stop offset="50%" stop-color="#05e6b7"/>
+          <stop offset="85%" stop-color="#ff1493"/>
+        </linearGradient>
+      </defs>
+      <!-- Brain Outline & Sulci Traces -->
+      <path d="M120,20 C85,20 65,35 50,55 C35,75 35,100 45,120 C55,140 75,155 100,158 C108,159 116,155 120,150 C124,155 132,159 140,158 C165,155 185,140 195,120 C205,100 205,75 190,55 C175,35 155,20 120,20 Z" 
+            fill="none" stroke="url(#brainNeon)" stroke-width="4.5" stroke-dasharray="8 4"/>
+      <!-- Inner Brain Neural Nodes and Circuits -->
+      <path d="M70,70 Q95,45 120,70 T170,70" fill="none" stroke="#00f7ff" stroke-width="3" opacity="0.85"/>
+      <path d="M60,105 Q90,90 120,105 T180,105" fill="none" stroke="#05e6b7" stroke-width="3" opacity="0.85"/>
+      <path d="M80,130 Q105,115 120,130 T160,130" fill="none" stroke="#ff1493" stroke-width="2.5" opacity="0.85"/>
+      <circle cx="95" cy="55" r="4" fill="#ffe600" />
+      <circle cx="145" cy="55" r="4" fill="#00f7ff" />
+      <circle cx="120" cy="85" r="5" fill="#ff1493" />
+      <circle cx="85" cy="115" r="4" fill="#05e6b7" />
+      <circle cx="155" cy="115" r="4" fill="#ffe600" />
+      <!-- Central Spark Core -->
+      <circle cx="120" cy="85" r="16" fill="url(#brainNeon)" opacity="0.25"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ================= ANIMATED FLYING NEON AI SPRITES & FUNNY DUDES ================= -->
+
+<!-- 1. Winged Drone Dude with Jetpack (Flying at Top-Right) -->
+<div id="wingedBot" class="flying-sprite anim-winged-drone" style="top: 75px; right: 5%;" onclick="pokeSprite('winged')">
+  <div class="sprite-speech" id="speechWinged">🚀 "Firewall overdrive! Zooming to def-con 1!"</div>
+  <svg width="105" height="95" viewBox="0 0 120 110" class="filter drop-shadow-[0_0_12px_#00f7ff]">
+    <!-- Flapping Neon Holographic Wings -->
+    <path class="wing-left" d="M35,45 Q5,15 15,40 Q25,50 35,52 Z" fill="#00f7ff" opacity="0.8" stroke="#ffffff" stroke-width="1.5"/>
+    <path class="wing-right" d="M85,45 Q115,15 105,40 Q95,50 85,52 Z" fill="#00f7ff" opacity="0.8" stroke="#ffffff" stroke-width="1.5"/>
+    <!-- Jetpack Boosters Flame -->
+    <polygon class="jet-flame" points="50,90 55,108 60,90" fill="#ffe600" />
+    <polygon class="jet-flame" points="60,90 65,108 70,90" fill="#ff1493" />
+    <!-- Bot Metallic Torso -->
+    <rect x="42" y="58" width="36" height="32" rx="10" fill="#1b2a4a" stroke="#00f7ff" stroke-width="3"/>
+    <!-- Glowing Visor / Head -->
+    <rect x="36" y="24" width="48" height="36" rx="14" fill="#0d1b33" stroke="#00f7ff" stroke-width="3"/>
+    <!-- Animated Cute Smiling Screen -->
+    <circle cx="50" cy="40" r="5" fill="#05e6b7" />
+    <circle cx="70" cy="40" r="5" fill="#05e6b7" />
+    <path d="M54,48 Q60,54 66,48" stroke="#05e6b7" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- Antenna with glowing orb -->
+    <line x1="60" y1="24" x2="60" y2="12" stroke="#ffe600" stroke-width="2.5"/>
+    <circle cx="60" cy="10" r="4.5" fill="#ffe600" class="filter drop-shadow-[0_0_6px_#ffe600]"/>
+  </svg>
+</div>
+
+<!-- 2. Cyber Bee / Bug Bot (Fluttering at Top-Left) -->
+<div id="beeBot" class="flying-sprite anim-cyber-bee" style="top: 85px; left: 4%;" onclick="pokeSprite('bee')">
+  <div class="sprite-speech" id="speechBee">🐝 "Bzzzt! Sniffing zero-day malware!"</div>
+  <svg width="90" height="85" viewBox="0 0 110 100" class="filter drop-shadow-[0_0_12px_#ffe600]">
+    <!-- Flapping Neon Wings -->
+    <ellipse class="wing-left" cx="30" cy="30" rx="20" ry="10" fill="#00f7ff" opacity="0.75" transform="rotate(-30 30 30)"/>
+    <ellipse class="wing-right" cx="80" cy="30" rx="20" ry="10" fill="#00f7ff" opacity="0.75" transform="rotate(30 80 30)"/>
+    <!-- Striped Bee Body -->
+    <ellipse cx="55" cy="55" rx="30" ry="24" fill="#ffaa00" stroke="#000" stroke-width="2.5"/>
+    <path d="M42,34 L42,76 M55,31 L55,79 M68,34 L68,76" stroke="#111" stroke-width="4.5"/>
+    <!-- Cute Visor Face -->
+    <rect x="40" y="44" width="30" height="18" rx="8" fill="#02122b" stroke="#00f7ff" stroke-width="2"/>
+    <circle cx="48" cy="52" r="3" fill="#00f7ff"/>
+    <circle cx="62" cy="52" r="3" fill="#00f7ff"/>
+    <!-- Bug Legs -->
+    <path d="M35,68 L24,84 M45,74 L40,90 M65,74 L70,90 M75,68 L86,84" stroke="#ff1493" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Little Antennae -->
+    <path d="M46,33 Q40,20 34,22 M64,33 Q70,20 76,22" stroke="#ffe600" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<!-- 3. Spherical Pixel Orb Bot (Hovering Mid-Left) -->
+<div id="orbBot1" class="flying-sprite anim-orb-float hidden md:block" style="top: 42%; left: 3%;" onclick="pokeSprite('orb1')">
+  <div class="sprite-speech" id="speechOrb1">👾 "Copilot & Aurora access approved!"</div>
+  <svg width="80" height="80" viewBox="0 0 100 100" class="filter drop-shadow-[0_0_14px_#ff1493]">
+    <!-- Outer Glow Ring -->
+    <circle cx="50" cy="50" r="40" fill="url(#orbGrad)" stroke="#ff1493" stroke-width="3"/>
+    <defs>
+      <radialGradient id="orbGrad" cx="35%" cy="35%">
+        <stop offset="0%" stop-color="#ff77bb"/>
+        <stop offset="70%" stop-color="#4a0e3f"/>
+        <stop offset="100%" stop-color="#140212"/>
+      </radialGradient>
+    </defs>
+    <!-- Pixel Screen -->
+    <rect x="26" y="32" width="48" height="34" rx="10" fill="#07071f" stroke="#ff1493" stroke-width="2"/>
+    <!-- Happy Pixel Eyes -->
+    <rect x="34" y="44" width="8" height="8" rx="2" fill="#00f7ff"/>
+    <rect x="58" y="44" width="8" height="8" rx="2" fill="#00f7ff"/>
+    <path d="M44,56 Q50,60 56,56" stroke="#00f7ff" stroke-width="2.5" fill="none"/>
+    <!-- Head Antennas -->
+    <line x1="50" y1="10" x2="50" y2="2" stroke="#05e6b7" stroke-width="2.5"/>
+    <circle cx="50" cy="2" r="3" fill="#05e6b7"/>
+  </svg>
+</div>
+
+<!-- 4. Spider Crawler Cyber Bot (Crawling Mid-Right) -->
+<div id="spiderBot" class="flying-sprite anim-spider-patrol hidden md:block" style="top: 44%; right: 3%;" onclick="pokeSprite('spider')">
+  <div class="sprite-speech" id="speechSpider">🕷️ "USB bait detector running... Clean!"</div>
+  <svg width="85" height="85" viewBox="0 0 100 100" class="filter drop-shadow-[0_0_12px_#05e6b7]">
+    <!-- Spider Legs -->
+    <path d="M25,50 Q10,35 15,65 M28,60 Q12,65 20,85 M75,50 Q90,35 85,65 M72,60 Q88,65 80,85" stroke="#05e6b7" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <!-- Rounded Chassis -->
+    <rect x="28" y="32" width="44" height="40" rx="12" fill="#0b2424" stroke="#05e6b7" stroke-width="3"/>
+    <!-- Screen / Visor -->
+    <rect x="34" y="40" width="32" height="22" rx="7" fill="#021414"/>
+    <circle cx="43" cy="50" r="3.5" fill="#ffe600"/>
+    <circle cx="57" cy="50" r="3.5" fill="#ffe600"/>
+    <path d="M46,56 Q50,59 54,56" stroke="#ffe600" stroke-width="2" fill="none"/>
+    <!-- Sensor horns -->
+    <line x1="38" y1="32" x2="32" y2="20" stroke="#05e6b7" stroke-width="2.5"/>
+    <circle cx="32" cy="20" r="2.5" fill="#00f7ff"/>
+    <line x1="62" y1="32" x2="68" y2="20" stroke="#05e6b7" stroke-width="2.5"/>
+    <circle cx="68" cy="20" r="2.5" fill="#00f7ff"/>
+  </svg>
+</div>
+
+<!-- 5. Floating Cyber Crystal Shards (Parallax Atmosphere) -->
+<div class="flying-sprite anim-shard hidden lg:block" style="top: 22%; left: 24%;" onclick="pokeSprite('crystal')">
+  <svg width="34" height="60" viewBox="0 0 35 60" class="filter drop-shadow-[0_0_10px_#00f7ff]">
+    <polygon points="17,2 32,22 17,58 2,22" fill="#00f7ff" opacity="0.65" stroke="#ffffff" stroke-width="1.5"/>
+    <polygon points="17,2 32,22 17,58" fill="#05e6b7" opacity="0.8"/>
+  </svg>
+</div>
+<div class="flying-sprite anim-shard hidden lg:block" style="top: 26%; right: 26%; animation-delay: -2.5s;" onclick="pokeSprite('crystal')">
+  <svg width="30" height="52" viewBox="0 0 35 60" class="filter drop-shadow-[0_0_10px_#ff1493]">
+    <polygon points="17,2 32,22 17,58 2,22" fill="#ff1493" opacity="0.65" stroke="#ffffff" stroke-width="1.5"/>
+    <polygon points="17,2 32,22 17,58" fill="#ffe600" opacity="0.8"/>
+  </svg>
+</div>
+
+<!-- ================= TOP HEADER BAR ================= -->
+<header class="w-full max-w-5xl mx-auto flex items-center justify-between z-20 py-2 mb-2 relative">
+  <div class="flex items-center gap-3 cursor-pointer" onclick="goSplash()">
+    <!-- Holographic Shield Icon -->
+    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyberBlue via-neonCyan to-cyberPink border-2 border-white flex items-center justify-center text-2xl shadow-[0_0_15px_#00f7ff]">
+      🛡️
+    </div>
+    <div>
+      <h1 class="text-base sm:text-2xl font-cyber text-neonCyan tracking-wider font-extrabold sub-glow">
+        DIGITAL DAY AWARENESS
+      </h1>
+      <p class="text-[11px] sm:text-xs text-electricAqua font-bold uppercase tracking-wider flex items-center gap-1.5 font-tech">
+        <span>CYBER & AI CHALLENGE</span>
+        <span class="text-[10px] bg-cyberPink text-white px-2 py-0.2 rounded-full border border-black font-wacky">UCH 2026</span>
+        <span id="cloudSyncBadge" class="text-[10px] bg-electricAqua text-black px-2 py-0.2 rounded-full border border-black font-extrabold flex items-center gap-1">
+          <i class="fa-solid fa-bolt"></i> <span id="cloudSyncText">LIVE NETWORK</span>
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <button onclick="toggleAudio()" id="soundToggleBtn" class="cyber-btn bg-neonYellow text-black px-3.5 py-2 text-xs sm:text-sm flex items-center gap-2">
+      <i class="fa-solid fa-volume-high" id="soundIcon"></i>
+      <span class="hidden sm:inline" id="soundText">AUDIO ON</span>
+    </button>
+    <button onclick="openLeaderboard()" class="cyber-btn bg-neonCyan text-black px-3.5 py-2 text-xs sm:text-sm flex items-center gap-1.5">
+      <i class="fa-solid fa-trophy"></i>
+      <span class="hidden sm:inline">RANKINGS</span>
+    </button>
+  </div>
+</header>
+
+<!-- ================= MAIN CONTAINER ================= -->
+<main class="w-full max-w-4xl mx-auto flex-1 flex flex-col justify-center items-center z-20 py-2 relative">
+
+  <!-- ================= 0. DIGITAL DAY AWARENESS - MAIN SPLASH SCREEN ================= -->
+  <section id="screenSplash" class="w-full flex flex-col items-center text-center">
+    <div class="relative w-full max-w-2xl mb-6">
+      <!-- Glow Aura -->
+      <div class="absolute -inset-2 bg-gradient-to-r from-neonCyan via-cyberPink to-electricAqua rounded-[38px] blur-xl opacity-75"></div>
+      
+      <div class="relative holo-box p-6 sm:p-9">
+        
+        <!-- Top Neon Event Pill -->
+        <div class="inline-flex items-center gap-2 bg-gradient-to-r from-cyberPink to-blue-600 text-white font-wacky px-5 py-1.5 rounded-full border-2 border-neonCyan text-xs sm:text-sm uppercase shadow-lg mb-4 transform -rotate-1">
+          <i class="fa-solid fa-brain animate-pulse text-neonYellow"></i>
+          <span>UCH PLANT ANNUAL CYBER SECURITY & AI FESTIVAL</span>
+        </div>
+
+        <div class="text-6xl sm:text-7xl my-2 filter drop-shadow-[0_0_20px_#00f7ff]">
+          🌐⚡🤖
+        </div>
+        
+        <h1 class="text-3xl sm:text-5xl font-cyber text-neonCyan cyber-glow-title leading-tight my-2">
+          DIGITAL DAY AWARENESS
+        </h1>
+
+        <h2 class="text-xl sm:text-2xl font-tech font-extrabold text-electricAqua tracking-widest uppercase mb-3">
+          SECURE OUR FORMULAS • DEFEND THE PLANT LINE • MASTER ENTERPRISE AI
+        </h2>
+
+        <p class="text-sm sm:text-base text-cyan-100 font-bubble max-w-xl mx-auto leading-relaxed">
+          Step into our high-tech plant security grid! Test your reflexes against ransomware traps, suspicious vendor invoice requests, USB baits, and rogue AI chatbots.
+        </p>
+
+        <!-- Feature Grid Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-5">
+          <div class="bg-black/50 p-2.5 rounded-2xl border border-cyberPink shadow-[0_0_10px_rgba(255,20,147,0.3)]">
+            <span class="text-2xl block mb-1">🚨</span>
+            <span class="text-[11px] font-wacky text-cyberPink block">RANSOMWARE S.O.S</span>
+          </div>
+          <div class="bg-black/50 p-2.5 rounded-2xl border border-neonCyan shadow-[0_0_10px_rgba(0,247,255,0.3)]">
+            <span class="text-2xl block mb-1">🤖</span>
+            <span class="text-[11px] font-wacky text-neonCyan block">AURORA & COPILOT</span>
+          </div>
+          <div class="bg-black/50 p-2.5 rounded-2xl border border-electricAqua shadow-[0_0_10px_rgba(5,230,183,0.3)]">
+            <span class="text-2xl block mb-1">🎣</span>
+            <span class="text-[11px] font-wacky text-electricAqua block">PHISHING SHIELD</span>
+          </div>
+          <div class="bg-black/50 p-2.5 rounded-2xl border border-neonYellow shadow-[0_0_10px_rgba(255,230,0,0.3)]">
+            <span class="text-2xl block mb-1">🏆</span>
+            <span class="text-[11px] font-wacky text-neonYellow block">GLOBAL SCORES</span>
+          </div>
+        </div>
+
+        <!-- Sync Announcement Banner -->
+        <div class="mt-5 p-2.5 rounded-2xl bg-cyan-950/60 border border-neonCyan/60 flex items-center justify-center gap-2 text-xs text-cyan-200 font-bold font-tech">
+          <i class="fa-solid fa-tower-broadcast text-neonCyan animate-pulse"></i>
+          <span>Real-time score ranking active across plant workstations, tablets, and kiosks!</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enter Challenge CTA -->
+    <div class="flex flex-col sm:flex-row gap-4 w-full max-w-md justify-center">
+      <button onclick="goRegister()" class="cyber-btn bg-electricAqua hover:bg-teal-300 text-black text-xl sm:text-2xl py-4 sm:py-5 px-8 flex-1 flex items-center justify-center gap-3">
+        <i class="fa-solid fa-gamepad animate-bounce"></i>
+        <span>ENTER CHALLENGE</span>
+      </button>
+      <button onclick="openLeaderboard()" class="cyber-btn bg-indigo-600 hover:bg-indigo-500 text-white text-lg sm:text-xl py-4 sm:py-5 px-6 flex items-center justify-center gap-2 border-white">
+        <i class="fa-solid fa-trophy text-neonYellow"></i>
+        <span>VIEW BOARD</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= 1. REGISTRATION SCREEN ================= -->
+  <section id="screenRegister" class="w-full max-w-2xl hidden flex-col">
+    <div class="holo-box p-6 sm:p-8">
+      <div class="flex items-center justify-between border-b border-cyan-500/30 pb-4 mb-5">
+        <div>
+          <span class="text-xs text-neonCyan font-cyber tracking-widest uppercase">CREW IDENTIFICATION</span>
+          <h2 class="text-2xl sm:text-3xl font-wacky text-neonYellow">CHALLENGER SIGN-IN</h2>
+        </div>
+        <div class="text-4xl animate-bounce">🤖</div>
+      </div>
+
+      <form id="regForm" onsubmit="handleRegistration(event)">
+        <!-- Companion Avatar Row -->
+        <div class="mb-5">
+          <label class="block text-sm font-wacky text-cyan-200 mb-2 flex items-center justify-between">
+            <span>CHOOSE YOUR NEON AI COMPANION</span>
+            <span class="text-xs font-normal text-neonCyan bg-cyan-950/80 px-2.5 py-0.5 rounded-full border border-neonCyan">Reaction Companion</span>
+          </label>
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5" id="avatarPickerContainer">
+            <!-- Avatars injected dynamically -->
+          </div>
+        </div>
+
+        <!-- Input Fields -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+          <div class="sm:col-span-2">
+            <label class="block text-xs font-tech font-bold uppercase tracking-wider text-cyan-300 mb-1">Full Name *</label>
+            <input type="text" id="regName" required maxlength="60" placeholder="e.g. Alex Morgan / Sarah Connor" 
+              class="w-full bg-slate-950/90 text-white font-bold px-4 py-3 rounded-2xl border-2 border-neonCyan focus:outline-none focus:border-neonYellow focus:ring-4 focus:ring-neonCyan/30 placeholder-gray-500 font-bubble">
+          </div>
+          <div>
+            <label class="block text-xs font-tech font-bold uppercase tracking-wider text-cyan-300 mb-1">Job Role *</label>
+            <select id="regRole" required 
+              class="w-full bg-slate-950/90 text-white font-bold px-4 py-3 rounded-2xl border-2 border-cyberPink focus:outline-none focus:border-neonYellow font-bubble">
+              <option value="">Select your role</option>
+              <option>Operator</option>
+              <option>Technician</option>
+              <option>Engineer</option>
+              <option>Team Leader</option>
+              <option>Manager</option>
+              <option>Intern / Trainee</option>
+              <option>Other Plant Role</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-tech font-bold uppercase tracking-wider text-cyan-300 mb-1">Department *</label>
+            <select id="regDept" required 
+              class="w-full bg-slate-950/90 text-white font-bold px-4 py-3 rounded-2xl border-2 border-electricAqua focus:outline-none focus:border-neonYellow font-bubble">
+              <option value="">Select department</option>
+              <option>Production</option>
+              <option>Maintenance</option>
+              <option>Quality</option>
+              <option>EHS / EP</option>
+              <option>Supply Chain / Logistics</option>
+              <option>IT / Digital</option>
+              <option>HR / Administration</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="regError" class="text-sm text-cyberPink font-bold mb-3 min-h-[20px] font-bubble"></div>
+
+        <div class="flex gap-3">
+          <button type="button" onclick="goSplash()" class="cyber-btn bg-slate-800 text-cyan-200 px-6 py-3.5 text-base">
+            ← BACK
+          </button>
+          <button type="submit" class="cyber-btn bg-neonYellow text-black text-xl py-3.5 flex-1">
+            LAUNCH CHALLENGE! ⚡
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= 2. ACTIVE QUIZ SCREEN ================= -->
+  <section id="screenQuiz" class="w-full max-w-3xl hidden flex-col">
+    <!-- Top HUD Bar -->
+    <div class="w-full holo-box p-3 sm:p-4 mb-3 flex items-center justify-between border-neonCyan">
+      <!-- Companion Status -->
+      <div class="flex items-center gap-3">
+        <div id="quizAvatarEmoji" class="text-3xl bg-black/60 p-2 rounded-2xl border-2 border-neonCyan animate-bounce">
+          ⚡
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="quizAvatarName" class="font-cyber text-xs sm:text-sm text-neonCyan">NEURAL BOT</span>
+            <span id="quizPlayerName" class="text-xs text-gray-300 font-bold hidden sm:inline">| Player</span>
+          </div>
+          <span class="text-xs text-electricAqua font-tech font-black tracking-wider" id="liveScoreCounter">SCORE: 000</span>
+        </div>
+      </div>
+
+      <!-- Live Timer & Question Counter -->
+      <div class="flex items-center gap-2.5">
+        <div class="bg-black/60 px-3 py-1.5 rounded-xl border border-neonCyan/40 font-cyber text-xs text-neonYellow">
+          <span id="qIndexBadge">01</span> / <span id="qTotalBadge">10</span>
+        </div>
+        <div class="flex items-center gap-1.5 bg-cyberPink/30 border border-cyberPink px-3 py-1 rounded-xl font-mono font-black text-sm text-white">
+          <i class="fa-solid fa-stopwatch text-neonYellow animate-pulse"></i>
+          <span id="quizLiveTimer">00:00.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="w-full bg-slate-950 h-3.5 rounded-full border border-cyan-500/50 overflow-hidden mb-3 p-0.5 shadow-[0_0_10px_rgba(0,247,255,0.3)]">
+      <div id="quizProgressBar" class="h-full bg-gradient-to-r from-neonCyan via-electricAqua to-cyberPink rounded-full transition-all duration-300" style="width: 10%;"></div>
+    </div>
+
+    <!-- Question Card -->
+    <div id="questionCard" class="holo-box p-5 sm:p-8 relative">
+      <!-- Live commentary mascot speech bubble -->
+      <div class="absolute -top-4 right-6 bg-slate-900 text-neonCyan border-2 border-neonCyan rounded-2xl px-4 py-1 font-bold text-xs shadow-[0_0_12px_#00f7ff] flex items-center gap-2 animate-bounce">
+        <span id="companionSpeechText">"Think digitally, defend the plant line!"</span>
+      </div>
+
+      <!-- Question Type Pill -->
+      <div class="flex items-center gap-2 mb-3 mt-1">
+        <span id="questionTypeTag" class="bg-cyan-950 text-neonCyan font-cyber text-[10px] sm:text-xs uppercase px-3 py-1 rounded-full border border-neonCyan">
+          SINGLE CHOICE
+        </span>
+        <span id="multiHint" class="text-xs text-neonYellow font-bold hidden font-tech">
+          ⚠️ Pick all that apply!
+        </span>
+      </div>
+
+      <!-- Question Text -->
+      <h3 id="questionHeading" class="text-base sm:text-xl font-bold text-white mb-5 leading-relaxed font-bubble">
+        Loading challenge data...
+      </h3>
+
+      <!-- Options Container -->
+      <div id="optionsContainer" class="grid grid-cols-1 gap-3 mb-5">
+        <!-- Buttons injected dynamically -->
+      </div>
+
+      <!-- Live Explanation / Feedback Card -->
+      <div id="quizFeedback" class="hidden rounded-2xl p-4 border-2 text-sm font-bubble leading-relaxed mb-4">
+        <div class="font-wacky text-base mb-1" id="feedbackTitle">CORRECT!</div>
+        <p id="feedbackText" class="text-white">Explanation</p>
+      </div>
+
+      <!-- Quiz Foot Action Bar -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+        <button onclick="confirmExitQuiz()" class="cyber-btn bg-slate-800 text-gray-300 px-5 py-3 text-xs w-full sm:w-auto">
+          ✕ QUIT TO HOME
+        </button>
+        <button id="submitBtn" onclick="submitCurrentAnswer()" disabled class="cyber-btn bg-electricAqua text-black text-base sm:text-lg px-8 py-3.5 w-full sm:w-auto flex items-center justify-center gap-2">
+          <span>CHECK ANSWER</span>
+          <i class="fa-solid fa-check"></i>
+        </button>
+        <button id="nextBtn" onclick="proceedToNextQuestion()" class="hidden cyber-btn bg-neonYellow text-black text-base sm:text-lg px-8 py-3.5 w-full sm:w-auto flex items-center justify-center gap-2 animate-bounce">
+          <span id="nextBtnText">NEXT QUESTION</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3. SCORE / VICTORY SCREEN ================= -->
+  <section id="screenScore" class="w-full max-w-2xl hidden flex-col items-center text-center">
+    <div class="holo-box p-6 sm:p-9 w-full relative">
+      <div class="inline-block bg-cyberPink text-white font-wacky px-6 py-1.5 rounded-full border-2 border-white text-xs sm:text-sm uppercase shadow-lg mb-2 transform -rotate-2 animate-bounce">
+        MISSION REPORT FILED!
+      </div>
+
+      <div class="text-6xl sm:text-7xl my-3 filter drop-shadow-[0_0_25px_#00f7ff]" id="scoreTrophyEmoji">
+        🏆
+      </div>
+
+      <h2 id="scoreTitle" class="text-2xl sm:text-4xl font-cyber text-neonCyan cyber-glow-title leading-tight mb-1">
+        DIGITAL DAY CHAMPION!
+      </h2>
+      <p id="scoreSubText" class="text-cyan-100 font-bubble text-sm sm:text-base max-w-md mx-auto mb-6">
+        Brilliant reflexes! The plant network, industrial PLCs, and proprietary recipes are safe!
+      </p>
+
+      <!-- Stats Triple Bubble -->
+      <div class="grid grid-cols-3 gap-3 mb-6">
+        <div class="bg-black/50 border border-neonYellow p-3 rounded-2xl shadow-[0_0_10px_rgba(255,230,0,0.3)]">
+          <span class="text-xs text-gray-300 font-cyber block">SCORE</span>
+          <span id="finalScoreVal" class="text-xl sm:text-3xl font-wacky text-neonYellow">10 / 10</span>
+        </div>
+        <div class="bg-black/50 border border-neonCyan p-3 rounded-2xl shadow-[0_0_10px_rgba(0,247,255,0.3)]">
+          <span class="text-xs text-gray-300 font-cyber block">ACCURACY</span>
+          <span id="finalAccuracyVal" class="text-xl sm:text-3xl font-wacky text-neonCyan">100%</span>
+        </div>
+        <div class="bg-black/50 border border-electricAqua p-3 rounded-2xl shadow-[0_0_10px_rgba(5,230,183,0.3)]">
+          <span class="text-xs text-gray-300 font-cyber block">TIME</span>
+          <span id="finalTimeVal" class="text-base sm:text-xl font-mono font-bold text-electricAqua block mt-1">00:45.2</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <button onclick="openReview()" class="cyber-btn bg-neonCyan text-black text-xs sm:text-sm py-3.5 px-3">
+          🔍 REVIEW ANSWERS
+        </button>
+        <button onclick="openLeaderboard()" class="cyber-btn bg-neonYellow text-black text-xs sm:text-sm py-3.5 px-3">
+          🏆 LEADERBOARD
+        </button>
+        <button onclick="traceMyPrompt()" class="cyber-btn bg-electricAqua text-black text-xs sm:text-sm py-3.5 px-3">
+          <i class="fa-solid fa-route mr-1"></i> TRACE MY PROMPT
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROMPT JOURNEY SCREEN ================= -->
+  <section id="screenPromptJourney" class="trace-page hidden flex-col">
+    <div class="flex items-center justify-between gap-3 mb-5">
+      <button onclick="backToScore()" class="cyber-btn bg-indigo-600 text-white px-4 py-2 text-xs sm:text-sm">
+        <i class="fa-solid fa-arrow-left mr-1"></i> BACK
+      </button>
+      <span class="font-cyber text-neonCyan text-xs sm:text-sm tracking-widest">PROMPT TRACE</span>
+    </div>
+
+    <div class="text-center mb-8 sm:mb-12">
+      <h2 class="trace-heading text-2xl sm:text-4xl md:text-5xl font-black leading-tight">WHERE DOES YOUR PROMPT GO?</h2>
+      <p class="trace-subtitle text-sm sm:text-base mt-4 max-w-3xl mx-auto">A quick look at what can happen after you submit information to an AI service.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] gap-3 md:gap-2 items-center">
+      <div class="trace-step trace-pink">
+        <div class="text-5xl mb-4">🧑‍💻</div>
+        <h3>1. YOU ENTER IT</h3>
+        <p>You type a prompt or add an image, file or voice message.</p>
+      </div>
+      <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      <div class="trace-step trace-green">
+        <div class="text-5xl mb-4">🤖</div>
+        <h3>2. AI RECEIVES IT</h3>
+        <p>The AI service processes your prompt to understand the request.</p>
+      </div>
+      <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      <div class="trace-step trace-yellow">
+        <div class="text-5xl mb-4">🧠</div>
+        <h3>3. POSSIBLE MODEL IMPROVEMENT</h3>
+        <p>Depending on the service and your settings, eligible prompts may be used to improve AI models.</p>
+      </div>
+      <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      <div class="trace-step">
+        <div class="text-5xl mb-4">↩️</div>
+        <h3>4. RESPONSE RETURNS</h3>
+        <p>The AI sends its generated response back to your device.</p>
+      </div>
+    </div>
+
+    <div class="trace-note mt-8 sm:mt-10">
+      <h3 class="font-cyber text-neonYellow text-sm sm:text-lg font-black mb-2">YOUR PROMPT MAY TRAVEL BEYOND THE CHAT WINDOW</h3>
+      <p class="text-cyan-100 font-bubble text-sm sm:text-base font-bold">Always check the AI service, its data-use settings and your organisation's policies before sharing sensitive information.</p>
+    </div>
+
+    <div class="flex justify-center mt-7 sm:mt-9">
+      <button onclick="openKinobinFlow()" class="cyber-btn bg-neonYellow text-black text-sm sm:text-base px-6 sm:px-8 py-3.5">
+        HOW AURORA HANDLES DATA <i class="fa-solid fa-arrow-right ml-2"></i>
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= KINOBIN DATA FLOW SCREEN ================= -->
+  <section id="screenKinobin" class="trace-page hidden flex-col">
+    <div class="flex items-center justify-between gap-3 mb-5">
+      <button onclick="backToPromptJourney()" class="cyber-btn bg-indigo-600 text-white px-4 py-2 text-xs sm:text-sm">
+        <i class="fa-solid fa-arrow-left mr-1"></i> BACK
+      </button>
+      <span class="font-cyber text-neonCyan text-xs sm:text-sm tracking-widest">PROMPT TRACE</span>
+    </div>
+
+    <div class="text-center mb-8 sm:mb-10">
+      <h2 class="trace-heading text-2xl sm:text-4xl md:text-5xl font-black leading-tight">HOW AURORA HANDLES DATA</h2>
+      <p class="trace-subtitle text-sm sm:text-base mt-4 max-w-3xl mx-auto">AURORA removes the model-improvement step from this prompt journey.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[.8fr_1.2fr] gap-6 lg:gap-10 items-center">
+      <div class="trace-art">
+        <svg viewBox="0 0 300 300" role="img" aria-label="Digital shield protecting information">
+          <defs>
+            <linearGradient id="traceShieldGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#00f7ff"/>
+              <stop offset="1" stop-color="#ff1493"/>
+            </linearGradient>
+          </defs>
+          <path d="M150 18 258 62v83c0 72-42 112-108 137C84 257 42 217 42 145V62Z" fill="#061b3d" stroke="url(#traceShieldGrad)" stroke-width="9" stroke-linejoin="round"/>
+          <path d="M150 47 229 79v66c0 53-29 84-79 107-50-23-79-54-79-107V79Z" fill="#082e57" stroke="#00f7ff" stroke-width="3"/>
+          <path d="M150 88v124M88 150h124M106 106l88 88m0-88-88 88" stroke="#05e6b7" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="150" cy="150" r="32" fill="#ff1493" stroke="#fff" stroke-width="4"/>
+          <path d="m135 151 11 11 21-25" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="150" cy="18" r="8" fill="#ffe600" stroke="#061b3d" stroke-width="4"/>
+        </svg>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-3 items-center">
+        <div class="trace-step trace-pink">
+          <div class="trace-number">1</div>
+          <h3>YOU ENTER IT</h3>
+          <p>Your prompt is submitted.</p>
+        </div>
+        <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="trace-step trace-green">
+          <div class="trace-number">2</div>
+          <h3>AI PROCESSES IT</h3>
+          <p>The AI handles the request to generate a response.</p>
+        </div>
+        <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="trace-step">
+          <div class="trace-number">3</div>
+          <h3>RESPONSE RETURNS</h3>
+          <p>The response is sent back to you.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="trace-note mt-8 sm:mt-10">
+      <h3 class="font-cyber text-neonYellow text-sm sm:text-lg font-black mb-2">NO MODEL-IMPROVEMENT STEP</h3>
+      <p class="text-cyan-100 font-bubble text-sm sm:text-base font-bold">Unlike the general flow shown on the previous page, this AURORA flow does not include the possible model-improvement stage.</p>
+    </div>
+
+    <div class="flex justify-center mt-7 sm:mt-9">
+      <button onclick="backToScore()" class="cyber-btn bg-electricAqua text-black text-sm sm:text-base px-7 py-3.5">
+        <i class="fa-solid fa-arrow-left mr-2"></i> BACK TO SCORE
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= 4. REVIEW SCREEN ================= -->
+  <section id="screenReview" class="w-full max-w-3xl hidden flex-col">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-cyber text-neonCyan">LEARNING REVIEW</h2>
+        <p class="text-xs sm:text-sm text-cyan-200 font-bubble">Reinforce secure digital habits for the plant.</p>
+      </div>
+      <button onclick="goScore()" class="cyber-btn bg-slate-800 text-white px-4 py-2 text-xs">
+        ← BACK TO SCORE
+      </button>
+    </div>
+
+    <!-- Review List Container -->
+    <div id="reviewContainer" class="space-y-4 max-h-[66vh] overflow-y-auto pr-1">
+      <!-- Injected dynamically -->
+    </div>
+
+    <div class="flex justify-between items-center mt-5 pt-3 border-t border-cyan-500/30">
+      <button onclick="goSplash()" class="cyber-btn bg-slate-800 text-cyan-200 px-5 py-3 text-sm">
+        🌐 MAIN SCREEN
+      </button>
+      <button onclick="playAgain()" class="cyber-btn bg-electricAqua text-black px-6 py-3 text-base">
+        PLAY AGAIN ⚡
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= 5. LEADERBOARD SCREEN ================= -->
+  <section id="screenLeaderboard" class="w-full max-w-3xl hidden flex-col">
+    <div class="holo-box p-5 sm:p-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 border-b border-cyan-500/30 pb-4 mb-4">
+        <div>
+          <span class="text-xs text-neonCyan font-cyber tracking-widest flex items-center gap-1.5">
+            <span>LIVE GLOBAL LEADERBOARD</span>
+            <span class="bg-electricAqua text-black text-[10px] px-2 py-0.2 rounded-full font-bold">ALL DEVICES</span>
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-wacky text-neonYellow">PLANT CHAMPIONS</h2>
+          <p class="text-xs text-gray-300">Ranked by highest score, then fastest completion time.</p>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="exportCSV()" class="cyber-btn bg-electricAqua text-black px-3.5 py-2 text-xs flex items-center gap-1.5">
+            <i class="fa-solid fa-file-excel"></i>
+            <span>EXPORT CSV</span>
+          </button>
+          <button onclick="manualRefreshBoard()" class="cyber-btn bg-neonCyan text-black px-3 py-2 text-xs" title="Sync now">
+            <i class="fa-solid fa-rotate"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Table Wrapper -->
+      <div class="overflow-x-auto rounded-2xl border border-cyan-500/40 bg-black/60 mb-4 max-h-[50vh]">
+        <table class="w-full text-left text-sm border-collapse min-w-[550px]">
+          <thead class="bg-slate-900/90 text-neonCyan font-cyber text-xs border-b border-cyan-500/30">
+            <tr>
+              <th class="p-3">RANK</th>
+              <th class="p-3">CHALLENGER</th>
+              <th class="p-3">ROLE / DEPT</th>
+              <th class="p-3">SCORE</th>
+              <th class="p-3">TIME</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboardRows" class="font-bubble divide-y divide-white/10">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+        <div id="boardEmptyMsg" class="p-8 text-center text-gray-400 font-bubble hidden">
+          No champions recorded yet! Be the first to defend the factory!
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <button onclick="goSplash()" class="cyber-btn bg-slate-800 text-white px-5 py-3 text-sm">
+          🌐 MAIN SCREEN
+        </button>
+        <button onclick="goRegister()" class="cyber-btn bg-neonYellow text-black px-6 py-3 text-base">
+          START CHALLENGE →
+        </button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= CUSTOM CYBER MODAL ================= -->
+<div id="customModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+  <div class="holo-box p-6 max-w-sm w-full text-center relative border-neonCyan">
+    <div id="modalEmoji" class="text-5xl mb-2">⚡</div>
+    <h3 id="modalTitle" class="text-xl font-cyber text-neonYellow mb-2">SYSTEM ALERT</h3>
+    <p id="modalMsg" class="text-sm text-cyan-100 font-bubble mb-5 leading-relaxed">Alert message goes here...</p>
+    <div id="modalActions" class="flex justify-center gap-3">
+      <button onclick="closeModal()" class="cyber-btn bg-electricAqua text-black px-6 py-2.5 text-base">
+        CONFIRM
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="w-full max-w-4xl mx-auto text-center text-xs text-neonCyan/70 font-tech py-2 z-20 flex items-center justify-center gap-3">
+  <span>🛡️ DIGITAL DAY AWARENESS 2026</span> • <span>MICHELIN UCH CYBER SAFETY</span> • <span>ALL DEVICES SYNCHRONIZED</span>
+</footer>
+
+<!-- ================= FIREBASE CLOUD STORAGE INTEGRATION ================= -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import { getFirestore, doc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+const appId = typeof __app_id !== 'undefined' ? __app_id : 'digital-day-awareness-uch-2026';
+let db = null;
+let auth = null;
+let isCloudActive = false;
+
+if (typeof __firebase_config !== 'undefined') {
+  try {
+    const firebaseConfig = JSON.parse(__firebase_config);
+    const app = initializeApp(firebaseConfig);
+    db = getFirestore(app);
+    auth = getAuth(app);
+
+    const token = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+    const authPromise = token ? signInWithCustomToken(auth, token) : signInAnonymously(auth);
+
+    authPromise.then((userCredential) => {
+      isCloudActive = true;
+      document.getElementById('cloudSyncBadge').classList.replace('bg-electricAqua', 'bg-electricAqua');
+      document.getElementById('cloudSyncText').textContent = 'LIVE CLOUD ACTIVE';
+
+      const colRef = collection(db, 'artifacts', appId, 'public', 'data', 'digitalDayScores');
+      onSnapshot(colRef, (snapshot) => {
+        const cloudData = [];
+        snapshot.forEach(docSnap => {
+          cloudData.push(docSnap.data());
+        });
+        window.mergeCloudLeaderboard(cloudData);
+      }, (err) => {
+        console.warn("Firestore snapshot error, continuing with local fallback:", err);
+      });
+    }).catch(err => {
+      console.warn("Auth initialization error, relying on local sync:", err);
+    });
+  } catch (err) {
+    console.warn("Firebase setup error:", err);
+  }
+}
+
+window.uploadResultToCloud = async function(record) {
+  if (!isCloudActive || !db || !auth || !auth.currentUser) return;
+  try {
+    const recordId = 'score_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'digitalDayScores', recordId);
+    await setDoc(docRef, {
+      ...record,
+      userId: auth.currentUser.uid,
+      timestamp: Date.now()
+    });
+  } catch(e) {
+    console.warn("Could not save to cloud:", e);
+  }
+};
+</script>
+
+<!-- ================= JAVASCRIPT GAME LOGIC ================= -->
+<script>
+'use strict';
+
+/* ---------------- AUDIO SYNTHESIZER (Web Audio API) ---------------- */
+let audioEnabled = true;
+let audioCtx = null;
+
+function initAudio() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+}
+
+function toggleAudio() {
+  audioEnabled = !audioEnabled;
+  const icon = document.getElementById('soundIcon');
+  const text = document.getElementById('soundText');
+  if (audioEnabled) {
+    icon.className = 'fa-solid fa-volume-high';
+    text.textContent = 'AUDIO ON';
+    playSound('boing');
+  } else {
+    icon.className = 'fa-solid fa-volume-xmark';
+    text.textContent = 'MUTED';
+  }
+}
+
+function playSound(type) {
+  if (!audioEnabled) return;
+  try {
+    initAudio();
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    if (type === 'click') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(520, now);
+      osc.frequency.exponentialRampToValueAtTime(880, now + 0.08);
+      gain.gain.setValueAtTime(0.12, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+      osc.start(now);
+      osc.stop(now + 0.08);
+    } else if (type === 'boing') {
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(240, now);
+      osc.frequency.exponentialRampToValueAtTime(950, now + 0.22);
+      gain.gain.setValueAtTime(0.18, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.24);
+      osc.start(now);
+      osc.stop(now + 0.24);
+    } else if (type === 'correct') {
+      [587.33, 739.99, 880.00, 1174.66].forEach((freq, idx) => {
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.type = 'triangle';
+        o.frequency.setValueAtTime(freq, now + idx * 0.07);
+        g.gain.setValueAtTime(0.12, now + idx * 0.07);
+        g.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.22);
+        o.connect(g);
+        g.connect(audioCtx.destination);
+        o.start(now + idx * 0.07);
+        o.stop(now + idx * 0.07 + 0.22);
+      });
+    } else if (type === 'wrong') {
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(200, now);
+      osc.frequency.linearRampToValueAtTime(70, now + 0.35);
+      gain.gain.setValueAtTime(0.25, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+      osc.start(now);
+      osc.stop(now + 0.35);
+    } else if (type === 'victory') {
+      [523, 659, 783, 1046, 1318].forEach((f, i) => {
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.type = 'sine';
+        o.frequency.setValueAtTime(f, now + i * 0.12);
+        g.gain.setValueAtTime(0.18, now + i * 0.12);
+        g.gain.exponentialRampToValueAtTime(0.001, now + i * 0.12 + 0.38);
+        o.connect(g);
+        g.connect(audioCtx.destination);
+        o.start(now + i * 0.12);
+        o.stop(now + i * 0.12 + 0.38);
+      });
+    } else if (type === 'ding') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(1350, now);
+      gain.gain.setValueAtTime(0.18, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+      osc.start(now);
+      osc.stop(now + 0.45);
+    }
+  } catch(e) {
+    console.log("Audio awaiting gesture");
+  }
+}
+
+/* ---------------- AVATARS DATABASE ---------------- */
+const AVATARS = [
+  { id: 0, name: "Winged Bot", emoji: "🚀", quote: "Jet-boosting over firewalls!", perk: "+10 Airborne Defense" },
+  { id: 1, name: "Cyber Bee", emoji: "🐝", quote: "Stinging phishing links on sight!", perk: "Bait Stinger" },
+  { id: 2, name: "Pixel Orb", emoji: "👾", quote: "Enterprise Copilot & Aurora certified!", perk: "Zero Latency" },
+  { id: 3, name: "Spider Mech", emoji: "🕷️", quote: "No unapproved USBs pass my sensor web!", perk: "Hardware Guard" },
+  { id: 4, name: "Neural Spark", emoji: "⚡", quote: "Formulas and plant networks protected!", perk: "Overclocked Brain" }
+];
+
+let selectedAvatarId = 0;
+
+/* ---------------- 10 REAL FACTORY CYBERSECURITY & AI QUESTIONS ---------------- */
+const QUESTIONS = [
+  {
+    type: 'Single choice',
+    q: 'A production computer suddenly flashes a red lock screen stating: "Your manufacturing files have been encrypted. Pay within 24 hours to restore access." What is the immediate first action?',
+    opts: [
+      'Try restarting the machine several times to clear the message.',
+      'Disconnect the machine\'s network cable (or disable Wi-Fi) immediately, leave the computer powered on, and alert plant IT/Security.',
+      'Click the link on the screen to see how much ransom is demanded.',
+      'Delete the infected files from the recycle bin.'
+    ],
+    ans: 1,
+    why: 'Disconnecting the network cable isolates the host and halts the lateral spread of ransomware across the factory network, while leaving the power on preserves volatile memory (RAM) for forensic analysis.',
+    wackyQuip: 'Heroic reflexes! You halted the ransomware outbreak!'
+  },
+  {
+    type: 'Single choice',
+    q: 'Who are the designated responsible persons for CORE and NON-CORE operational systems at Michelin UCH?',
+    opts: [
+      'RGOF & RGEP',
+      'IS/IT Lead (Core) & Maintenance Tech (Non-Core)',
+      'Line Production Operator & Maintenance Lead',
+      'Facility Admin & External Contractor'
+    ],
+    ans: 0,
+    why: 'At Michelin UCH, RGOF and RGEP hold primary operational governance and ownership for CORE and NON-CORE frameworks.',
+    wackyQuip: 'Exact plant governance! RGOF & RGEP steer operational resilience!'
+  },
+  {
+    type: 'Single choice',
+    q: 'When a factory wants to implement a project that falls within the defined digital manufacturing framework, what action must it take?',
+    opts: [
+      'Submit the project directly to the MO I4.0 committee for approval',
+      'Inform their I4.0 program managers of the initiative',
+      'Request a custom license from central (PE, DOTI) teams',
+      'Deploy only via DOTI or DOMF/ME internal teams'
+    ],
+    ans: 1,
+    why: 'When implementing a project in the digital manufacturing framework, the factory must inform their I4.0 program managers of the initiative.',
+    wackyQuip: 'Protocol respected! Keeping I4.0 program managers aligned!'
+  },
+  {
+    type: 'Multiple select',
+    q: 'Which of the following AI solutions are officially approved for handling internal company data and business documents? (Select all that apply)',
+    opts: [
+      'Free Public ChatGPT (OpenAI web interface)',
+      'Microsoft Copilot (Enterprise / Corporate authenticated account)',
+      'Aurora (Internal Enterprise AI platform)',
+      'Claude (Free public web version)',
+      'Gemini (Free public consumer account)'
+    ],
+    ans: [1, 2],
+    why: 'Only enterprise-managed environments—such as corporate-licensed Microsoft Copilot and internal platforms like Aurora—provide commercial data protection where inputs are not saved, logged for public training, or exposed outside company security boundaries. Free consumer web tools are strictly prohibited for company data.',
+    wackyQuip: 'Only enterprise Copilot & Aurora have factory clearance!'
+  },
+  {
+    type: 'Single choice',
+    q: 'An urgent email from a known raw material supplier requests immediate payment diversion to a new bank account. What is the correct response?',
+    opts: [
+      'Reply directly to the email to confirm the accounting contact’s details.',
+      'Update the vendor’s banking details right away to avoid supply chain interruptions.',
+      'Mark the email as suspicious via the Phishing reporting button and verify the change with the vendor using a known, pre-established phone number.',
+      'Forward the email thread to the procurement team’s personal email addresses for review.'
+    ],
+    ans: 2,
+    why: 'Business Email Compromise (BEC) regularly targets manufacturing suppliers. Never trust bank account changes requested via email without out-of-band verification (calling known official numbers, not numbers listed in the email).',
+    wackyQuip: 'Scammers foiled! Always verify out-of-band using pre-existing phone records!'
+  },
+  {
+    type: 'Multiple select',
+    q: 'You recorded a short technical video of a machine issue on the shop floor to get troubleshooting advice from an overseas specialist. Which of the following platforms are officially permitted to upload and share this footage? (Select all that apply)',
+    opts: [
+      'Microsoft Teams',
+      'WhatsApp',
+      'Microsoft SharePoint',
+      'Personal Google Drive',
+      'Microsoft OneDrive (Corporate)',
+      'Telegram'
+    ],
+    ans: [0, 2, 4],
+    why: 'Shop-floor machine setups, mechanisms, and error codes are proprietary plant data. They must only be shared through company-managed, secured enterprise tools (Microsoft Teams, SharePoint, and corporate OneDrive). Consumer messaging and personal cloud platforms lack corporate encryption, access controls, and compliance oversight.',
+    wackyQuip: 'IP securely contained inside official enterprise cloud tools!'
+  },
+  {
+    type: 'Single choice',
+    q: 'How is the digital framework defined and run at Michelin?',
+    opts: [
+      'It is defined independently by individual plant production managers based on local shop-floor requirements.',
+      'It is defined by central teams (DOMF/ME/I4.0, DOTI, DOMF/ME/PE/MTH) using standard catalogs and rules (FGSR, AGSR, and Core / Non-Core rules).',
+      'It is managed entirely by third-party external automation vendors without central governance.',
+      'It is decided exclusively by local plant HR and quality safety audit teams.'
+    ],
+    ans: 1,
+    why: 'The digital framework is defined by central teams (DOMF/ME/I4.0, DOTI, DOMF/ME/PE/MTH) using standard catalogs and rules (FGSR, AGSR, and Core / Non-Core rules).',
+    wackyQuip: 'Standard catalogs, FGSR, and AGSR keep Michelin unified!'
+  },
+  {
+    type: 'Multiple select',
+    q: 'Which of these technologies are validated for digital manufacturing in Industry 4.0? (Select all that apply)',
+    opts: [
+      'Power BI Gateway',
+      'AVEVA PI (formerly Osisoft PI)',
+      'Micro-Strategy (for new projects)',
+      'Dataiku (Local & Central)',
+      'Power BI Desktop & Online',
+      'Power Platform (PowerApps, PowerAutomate)'
+    ],
+    ans: [1, 3, 4, 5],
+    why: 'AVEVA PI, Dataiku (Local & Central), Power BI Desktop & Online, and Power Platform are approved and validated. Note: Power BI Gateway is explicitly prohibited for plant infrastructure usage, and Micro-Strategy is no longer used for new needs (migrated to Cloud Program).',
+    wackyQuip: 'Spot on! You know the approved I4.0 software stack!'
+  },
+  {
+    type: 'Single choice',
+    q: 'Three operators on the same shift share a single supervisory login ID and password written on a sticky note attached to the control panel screen. Why is this a major violation?',
+    opts: [
+      'Sticky notes are a fire hazard in industrial zones.',
+      'It prevents traceability and accountability for critical process changes and makes credential theft effortless.',
+      'Passwords degrade software performance over time.',
+      'It prevents operators from receiving company bonus notifications.'
+    ],
+    ans: 1,
+    why: 'Individual accountability is mandatory for audit trails; writing credentials on panels allows anyone to execute unauthorized configuration changes without detection.',
+    wackyQuip: 'No credentials on sticky notes! Traceability is critical for plant safety!'
+  },
+  {
+    type: 'Single choice',
+    q: 'An operator discovers an online CAD/diagram conversion tool that runs significantly faster than official software. What is the proper procedure?',
+    opts: [
+      'Install the tool if the site has verified positive customer reviews online.',
+      'Run an online file scanner on the executable before installing it on the workstation.',
+      'Submit a formal software evaluation and installation request through the official IT Service Portal.',
+      'Use the software strictly during low-bandwidth periods such as night shifts.'
+    ],
+    ans: 2,
+    why: 'Downloading and installing unvetted software ("Shadow IT") introduces potential vulnerabilities, malware, and software license non-compliance. All software deployments must be vetted and installed by official IT channels.',
+    wackyQuip: 'Shadow IT intercepted! Always submit a request via the IT Service Portal!'
+  }
+];
+
+/* ---------------- GAME STATE ---------------- */
+const LOCAL_STORAGE_KEY = 'michelinUCH_DigitalDayQuiz_2026';
+
+let currentPlayer = null;
+let currentQIndex = 0;
+let userSelections = [];
+let questionLocked = false;
+let startTime = 0;
+let timerInterval = null;
+let lastGameResult = null;
+let currentScore = 0;
+
+let allLeaderboardEntries = [];
+
+/* ---------------- SCREEN TRANSITIONS ---------------- */
+const screens = {
+  splash: document.getElementById('screenSplash'),
+  register: document.getElementById('screenRegister'),
+  quiz: document.getElementById('screenQuiz'),
+  score: document.getElementById('screenScore'),
+  promptJourney: document.getElementById('screenPromptJourney'),
+  kinobin: document.getElementById('screenKinobin'),
+  review: document.getElementById('screenReview'),
+  leaderboard: document.getElementById('screenLeaderboard')
+};
+
+function showScreen(name) {
+  Object.values(screens).forEach(s => {
+    s.classList.add('hidden');
+    s.classList.remove('flex');
+  });
+  screens[name].classList.remove('hidden');
+  screens[name].classList.add('flex');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goSplash() {
+  playSound('click');
+  clearInterval(timerInterval);
+  showScreen('splash');
+}
+
+function goRegister() {
+  playSound('boing');
+  renderAvatarPicker();
+  showScreen('register');
+}
+
+function goScore() {
+  playSound('click');
+  showScreen('score');
+}
+
+function traceMyPrompt() {
+  playSound('click');
+  showScreen('promptJourney');
+}
+
+function openKinobinFlow() {
+  playSound('click');
+  showScreen('kinobin');
+}
+
+function backToPromptJourney() {
+  playSound('click');
+  showScreen('promptJourney');
+}
+
+function backToScore() {
+  playSound('click');
+  showScreen('score');
+}
+
+function playAgain() {
+  playSound('boing');
+  document.getElementById('regForm').reset();
+  document.getElementById('regError').textContent = '';
+  showScreen('register');
+}
+
+function confirmExitQuiz() {
+  showCustomModal(
+    "ABANDON MISSION?",
+    "Your current progress will not be logged. Return to the main Digital Day portal?",
+    "⚠️",
+    true,
+    () => {
+      clearInterval(timerInterval);
+      goSplash();
+    }
+  );
+}
+
+/* ---------------- AVATAR SELECTION ---------------- */
+function renderAvatarPicker() {
+  const container = document.getElementById('avatarPickerContainer');
+  container.innerHTML = '';
+  AVATARS.forEach((av) => {
+    const isSelected = av.id === selectedAvatarId;
+    const card = document.createElement('div');
+    card.className = `cursor-pointer p-2 rounded-2xl border-2 transition-all text-center flex flex-col items-center justify-center ${
+      isSelected 
+        ? 'bg-neonCyan text-black border-white shadow-[0_0_15px_#00f7ff] scale-105' 
+        : 'bg-black/60 text-white border-neonCyan/30 hover:border-neonCyan hover:scale-102'
+    }`;
+    card.onclick = () => {
+      selectedAvatarId = av.id;
+      playSound('click');
+      renderAvatarPicker();
+    };
+    card.innerHTML = `
+      <div class="text-3xl mb-1">${av.emoji}</div>
+      <div class="text-xs font-cyber leading-tight">${av.name}</div>
+      <div class="text-[9px] font-tech font-bold opacity-80 mt-0.5">${av.perk}</div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+/* ---------------- REGISTRATION ---------------- */
+function handleRegistration(e) {
+  e.preventDefault();
+  const name = document.getElementById('regName').value.trim();
+  const role = document.getElementById('regRole').value;
+  const dept = document.getElementById('regDept').value;
+  const errEl = document.getElementById('regError');
+
+  if (!name || !role || !dept) {
+    errEl.textContent = 'Please complete all required fields!';
+    playSound('wrong');
+    return;
+  }
+
+  errEl.textContent = '';
+  currentPlayer = {
+    name,
+    role,
+    dept,
+    avatar: AVATARS[selectedAvatarId]
+  };
+
+  playSound('boing');
+  startQuizGame();
+}
+
+/* ---------------- QUIZ FLOW ---------------- */
+function startQuizGame() {
+  currentQIndex = 0;
+  userSelections = Array(QUESTIONS.length).fill(null);
+  currentScore = 0;
+  questionLocked = false;
+  startTime = performance.now();
+
+  const av = currentPlayer.avatar;
+  document.getElementById('quizAvatarEmoji').textContent = av.emoji;
+  document.getElementById('quizAvatarName').textContent = av.name.toUpperCase();
+  document.getElementById('quizPlayerName').textContent = `| ${currentPlayer.name}`;
+  document.getElementById('companionSpeechText').textContent = `"${av.quote}"`;
+  document.getElementById('liveScoreCounter').textContent = 'SCORE: 0';
+
+  clearInterval(timerInterval);
+  timerInterval = setInterval(updateLiveTimer, 73);
+
+  renderQuestion();
+  showScreen('quiz');
+}
+
+function formatDuration(ms) {
+  const total = Math.max(0, Math.floor(ms));
+  const m = Math.floor(total / 60000);
+  const s = Math.floor(total / 1000) % 60;
+  const d = Math.floor((total % 1000) / 100);
+  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}.${d}`;
+}
+
+function updateLiveTimer() {
+  const elapsed = performance.now() - startTime;
+  document.getElementById('quizLiveTimer').textContent = formatDuration(elapsed);
+}
+
+function renderQuestion() {
+  questionLocked = false;
+  const qData = QUESTIONS[currentQIndex];
+
+  document.getElementById('qIndexBadge').textContent = String(currentQIndex + 1).padStart(2, '0');
+  document.getElementById('qTotalBadge').textContent = String(QUESTIONS.length).padStart(2, '0');
+  const pct = ((currentQIndex) / QUESTIONS.length) * 100;
+  document.getElementById('quizProgressBar').style.width = `${pct}%`;
+
+  document.getElementById('questionTypeTag').textContent = qData.type.toUpperCase();
+  document.getElementById('multiHint').classList.toggle('hidden', qData.type !== 'Multiple select');
+
+  document.getElementById('questionHeading').textContent = qData.q;
+
+  const feedbackBox = document.getElementById('quizFeedback');
+  feedbackBox.className = 'hidden';
+
+  // Toggle button display: show Check button, hide Next button
+  const submitBtn = document.getElementById('submitBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  submitBtn.classList.remove('hidden');
+  nextBtn.classList.add('hidden');
+
+  const container = document.getElementById('optionsContainer');
+  container.innerHTML = '';
+
+  const currentSelection = userSelections[currentQIndex];
+
+  qData.opts.forEach((optText, optIdx) => {
+    const isMulti = qData.type === 'Multiple select';
+    const isSelected = isMulti 
+      ? Array.isArray(currentSelection) && currentSelection.includes(optIdx)
+      : currentSelection === optIdx;
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `w-full text-left p-3.5 sm:p-4 rounded-2xl border-2 font-bubble font-bold transition-all flex items-start gap-3 ${
+      isSelected 
+        ? 'bg-neonCyan text-black border-white shadow-[0_0_15px_#00f7ff] scale-[1.01]' 
+        : 'bg-slate-900/80 text-white border-cyan-500/30 hover:border-neonCyan hover:bg-slate-800/90'
+    }`;
+
+    const letterBadge = isMulti 
+      ? (isSelected ? '✓' : '□')
+      : String.fromCharCode(65 + optIdx);
+
+    btn.innerHTML = `
+      <span class="w-8 h-8 rounded-xl flex items-center justify-center font-cyber text-xs shrink-0 border ${
+        isSelected ? 'bg-black text-neonCyan border-black' : 'bg-white/10 text-neonCyan border-cyan-500/30'
+      }">${letterBadge}</span>
+      <span class="text-xs sm:text-base leading-snug flex-1">${optText}</span>
+    `;
+
+    btn.onclick = () => toggleOption(optIdx);
+    container.appendChild(btn);
+  });
+
+  updateSubmitButtonState();
+}
+
+function toggleOption(optIdx) {
+  if (questionLocked) return;
+  playSound('click');
+  const qData = QUESTIONS[currentQIndex];
+  const isMulti = qData.type === 'Multiple select';
+
+  if (isMulti) {
+    let list = Array.isArray(userSelections[currentQIndex]) ? [...userSelections[currentQIndex]] : [];
+    if (list.includes(optIdx)) {
+      list = list.filter(x => x !== optIdx);
+    } else {
+      list.push(optIdx);
+      list.sort((a,b) => a - b);
+    }
+    userSelections[currentQIndex] = list;
+  } else {
+    userSelections[currentQIndex] = optIdx;
+  }
+
+  renderQuestion();
+}
+
+function updateSubmitButtonState() {
+  const qData = QUESTIONS[currentQIndex];
+  const selection = userSelections[currentQIndex];
+  const submitBtn = document.getElementById('submitBtn');
+
+  const hasChosen = qData.type === 'Multiple select'
+    ? Array.isArray(selection) && selection.length > 0
+    : selection !== null && selection !== undefined;
+
+  submitBtn.disabled = !hasChosen;
+}
+
+function checkIsCorrect(qData, userPick) {
+  if (qData.type === 'Multiple select') {
+    if (!Array.isArray(userPick) || userPick.length !== qData.ans.length) return false;
+    return qData.ans.every(idx => userPick.includes(idx));
+  }
+  return userPick === qData.ans;
+}
+
+function submitCurrentAnswer() {
+  if (questionLocked) return;
+  const qData = QUESTIONS[currentQIndex];
+  const selection = userSelections[currentQIndex];
+  if (selection === null || selection === undefined) return;
+
+  questionLocked = true;
+  const isCorrect = checkIsCorrect(qData, selection);
+
+  const container = document.getElementById('optionsContainer');
+  const optionButtons = container.querySelectorAll('button');
+
+  optionButtons.forEach((btn, idx) => {
+    btn.disabled = true;
+    const isTargetCorrect = Array.isArray(qData.ans) ? qData.ans.includes(idx) : qData.ans === idx;
+    const isUserPick = Array.isArray(selection) ? selection.includes(idx) : selection === idx;
+
+    if (isTargetCorrect) {
+      btn.className = 'w-full text-left p-3.5 sm:p-4 rounded-2xl border-2 font-bubble font-bold bg-electricAqua text-black border-white shadow-[0_0_15px_#05e6b7] flex items-start gap-3';
+    } else if (isUserPick) {
+      btn.className = 'w-full text-left p-3.5 sm:p-4 rounded-2xl border-2 font-bubble font-bold bg-cyberPink text-white border-white shadow-[0_0_15px_#ff1493] shake-anim flex items-start gap-3';
+    } else {
+      btn.className = 'w-full text-left p-3.5 sm:p-4 rounded-2xl border-2 font-bubble font-bold bg-slate-900/40 text-gray-400 border-white/10 opacity-60 flex items-start gap-3';
+    }
+  });
+
+  const feedbackBox = document.getElementById('quizFeedback');
+  const titleEl = document.getElementById('feedbackTitle');
+  const textEl = document.getElementById('feedbackText');
+  feedbackBox.classList.remove('hidden');
+
+  if (isCorrect) {
+    playSound('correct');
+    triggerConfetti(45);
+    currentScore += 100;
+    document.getElementById('liveScoreCounter').textContent = `SCORE: ${currentScore}`;
+    feedbackBox.className = 'rounded-2xl p-4 border-2 text-sm font-bubble leading-relaxed mb-4 bg-teal-950/90 text-teal-200 border-electricAqua shadow-[0_0_15px_rgba(5,230,183,0.4)]';
+    titleEl.textContent = `🎉 CORRECT! ${qData.wackyQuip}`;
+    titleEl.className = 'font-cyber text-sm text-electricAqua mb-1';
+    document.getElementById('companionSpeechText').textContent = `"${currentPlayer.avatar.name}: Spot on! Great instincts!"`;
+  } else {
+    playSound('wrong');
+    feedbackBox.className = 'rounded-2xl p-4 border-2 text-sm font-bubble leading-relaxed mb-4 bg-rose-950/90 text-rose-200 border-cyberPink shadow-[0_0_15px_rgba(255,20,147,0.4)]';
+    titleEl.textContent = `⚡ INCORRECT! CHECK THE PROTOCOL BELOW`;
+    titleEl.className = 'font-cyber text-sm text-cyberPink mb-1';
+    document.getElementById('companionSpeechText').textContent = `"${currentPlayer.avatar.name}: Watch out for that safety policy!"`;
+  }
+
+  textEl.innerHTML = `<strong>Why:</strong> ${qData.why}`;
+
+  // Hide the Check Answer button and show the manual "NEXT QUESTION →" button
+  const submitBtn = document.getElementById('submitBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const nextBtnText = document.getElementById('nextBtnText');
+  
+  submitBtn.classList.add('hidden');
+  nextBtn.classList.remove('hidden');
+
+  if (currentQIndex === QUESTIONS.length - 1) {
+    nextBtnText.textContent = 'FINISH & VIEW RESULTS 🏁';
+  } else {
+    nextBtnText.textContent = 'NEXT QUESTION →';
+  }
+}
+
+function proceedToNextQuestion() {
+  playSound('click');
+  if (currentQIndex < QUESTIONS.length - 1) {
+    currentQIndex++;
+    renderQuestion();
+  } else {
+    finishQuiz();
+  }
+}
+
+/* ---------------- COMPLETION & SCORING ---------------- */
+function finishQuiz() {
+  clearInterval(timerInterval);
+  const totalElapsed = Math.round(performance.now() - startTime);
+
+  let correctCount = 0;
+  QUESTIONS.forEach((q, idx) => {
+    if (checkIsCorrect(q, userSelections[idx])) {
+      correctCount++;
+    }
+  });
+
+  const accuracyPct = Math.round((correctCount / QUESTIONS.length) * 100);
+
+  lastGameResult = {
+    id: 'entry_' + Date.now(),
+    name: currentPlayer.name,
+    role: currentPlayer.role,
+    dept: currentPlayer.dept,
+    avatar: currentPlayer.avatar.emoji + ' ' + currentPlayer.avatar.name,
+    score: correctCount,
+    total: QUESTIONS.length,
+    accuracy: accuracyPct,
+    timeMs: totalElapsed,
+    timeFormatted: formatDuration(totalElapsed),
+    dateStr: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+  };
+
+  saveLocalResult(lastGameResult);
+
+  if (typeof window.uploadResultToCloud === 'function') {
+    window.uploadResultToCloud(lastGameResult);
+  }
+
+  document.getElementById('finalScoreVal').textContent = `${correctCount} / ${QUESTIONS.length}`;
+  document.getElementById('finalAccuracyVal').textContent = `${accuracyPct}%`;
+  document.getElementById('finalTimeVal').textContent = formatDuration(totalElapsed);
+
+  const title = document.getElementById('scoreTitle');
+  const sub = document.getElementById('scoreSubText');
+  const emoji = document.getElementById('scoreTrophyEmoji');
+
+  if (correctCount === 10) {
+    playSound('victory');
+    triggerConfetti(120);
+    emoji.textContent = '👑';
+    title.textContent = 'SUPREME DIGITAL DEFENDER!';
+    sub.textContent = 'Flawless score! Factory production line and confidential compounding data are 100% safeguarded!';
+  } else if (correctCount >= 8) {
+    playSound('victory');
+    triggerConfetti(70);
+    emoji.textContent = '🛡️';
+    title.textContent = 'CYBER DEFENSE SPECIALIST!';
+    sub.textContent = 'Outstanding instincts! You disarm ransomware, fake invoices, and bait USB drives effortlessly!';
+  } else if (correctCount >= 5) {
+    playSound('correct');
+    emoji.textContent = '⚡';
+    title.textContent = 'SHIELD ACTIVATED!';
+    sub.textContent = 'Good effort! Check the answer review to polish all plant cybersecurity protocols.';
+  } else {
+    playSound('wrong');
+    emoji.textContent = '💥';
+    title.textContent = 'CIRCUITS OVERLOADED!';
+    sub.textContent = 'The digital traps breached the plant! Check the review and sharpen your digital habits!';
+  }
+
+  showScreen('score');
+}
+
+/* ---------------- REVIEW SCREEN ---------------- */
+function openReview() {
+  playSound('click');
+  const container = document.getElementById('reviewContainer');
+  container.innerHTML = '';
+
+  QUESTIONS.forEach((q, idx) => {
+    const pick = userSelections[idx];
+    const isCorrect = checkIsCorrect(q, pick);
+
+    const card = document.createElement('div');
+    card.className = `p-4 sm:p-5 rounded-2xl border-2 font-bubble ${
+      isCorrect ? 'bg-teal-950/60 border-electricAqua' : 'bg-rose-950/60 border-cyberPink'
+    } shadow-lg`;
+
+    let userAnsText = 'No answer chosen';
+    if (q.type === 'Multiple select') {
+      if (Array.isArray(pick) && pick.length) {
+        userAnsText = pick.map(i => `${String.fromCharCode(65 + i)}) ${q.opts[i]}`).join('<br>');
+      }
+    } else if (pick !== null && pick !== undefined) {
+      userAnsText = `${String.fromCharCode(65 + pick)}) ${q.opts[pick]}`;
+    }
+
+    let correctAnsText = '';
+    if (q.type === 'Multiple select') {
+      correctAnsText = q.ans.map(i => `${String.fromCharCode(65 + i)}) ${q.opts[i]}`).join('<br>');
+    } else {
+      correctAnsText = `${String.fromCharCode(65 + q.ans)}) ${q.opts[q.ans]}`;
+    }
+
+    card.innerHTML = `
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-cyber text-[10px] sm:text-xs tracking-wider text-neonCyan">QUESTION ${String(idx + 1).padStart(2,'0')} · ${q.type.toUpperCase()}</span>
+        <span class="text-xs font-wacky px-2.5 py-0.5 rounded-full border border-black ${
+          isCorrect ? 'bg-electricAqua text-black' : 'bg-cyberPink text-white'
+        }">${isCorrect ? 'SECURE ✓' : 'NEEDS ACTION ⚠️'}</span>
+      </div>
+      <h4 class="text-sm sm:text-base font-bold text-white mb-3">${q.q}</h4>
+      <div class="space-y-2 text-xs sm:text-sm">
+        <div class="p-2.5 rounded-xl bg-black/50 border border-white/10 ${isCorrect ? 'text-teal-200' : 'text-rose-200'}">
+          <strong class="block text-[10px] font-cyber opacity-80 uppercase">Your Answer:</strong>
+          ${userAnsText}
+        </div>
+        <div class="p-2.5 rounded-xl bg-black/50 border border-electricAqua/40 text-emerald-200">
+          <strong class="block text-[10px] font-cyber opacity-80 uppercase">Official Plant Protocol:</strong>
+          ${correctAnsText}
+        </div>
+      </div>
+      <div class="mt-3 p-3 rounded-xl bg-slate-900/90 border border-neonCyan/30 text-xs text-cyan-100 leading-relaxed">
+        <strong>💡 Key Security Takeaway:</strong> ${q.why}
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+
+  showScreen('review');
+}
+
+/* ---------------- LEADERBOARD ---------------- */
+function getLocalResults() {
+  try {
+    const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveLocalResult(record) {
+  try {
+    const list = getLocalResults();
+    list.push(record);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(list));
+    mergeCloudLeaderboard([record]);
+  } catch(e) {
+    console.warn("Storage error", e);
+  }
+}
+
+window.mergeCloudLeaderboard = function(incomingList) {
+  const map = new Map();
+
+  getLocalResults().forEach(item => {
+    const key = `${item.name}_${item.score}_${item.timeMs}`;
+    map.set(key, item);
+  });
+
+  if (Array.isArray(incomingList)) {
+    incomingList.forEach(item => {
+      const key = `${item.name}_${item.score}_${item.timeMs}`;
+      map.set(key, item);
+    });
+  }
+
+  allLeaderboardEntries = Array.from(map.values());
+  allLeaderboardEntries.sort((a, b) => b.score - a.score || a.timeMs - b.timeMs);
+
+  renderLeaderboardDOM();
+};
+
+function manualRefreshBoard() {
+  playSound('ding');
+  window.mergeCloudLeaderboard([]);
+  showToast("Leaderboard synchronizing with cloud network!");
+}
+
+function openLeaderboard() {
+  playSound('boing');
+  renderLeaderboardDOM();
+  showScreen('leaderboard');
+}
+
+function renderLeaderboardDOM() {
+  const tbody = document.getElementById('leaderboardRows');
+  const empty = document.getElementById('boardEmptyMsg');
+  tbody.innerHTML = '';
+
+  if (!allLeaderboardEntries.length) {
+    empty.classList.remove('hidden');
+    return;
+  }
+  empty.classList.add('hidden');
+
+  allLeaderboardEntries.forEach((row, i) => {
+    const tr = document.createElement('tr');
+    tr.className = 'border-b border-white/10 hover:bg-white/5 transition-colors';
+
+    let rankBadge = `${i + 1}`;
+    if (i === 0) rankBadge = '🥇 1st';
+    else if (i === 1) rankBadge = '🥈 2nd';
+    else if (i === 2) rankBadge = '🥉 3rd';
+
+    tr.innerHTML = `
+      <td class="p-3 font-cyber text-neonYellow text-xs sm:text-sm">${rankBadge}</td>
+      <td class="p-3 font-bold text-white flex items-center gap-2">
+        <span>${row.avatar ? row.avatar.split(' ')[0] : '🤖'}</span>
+        <span>${row.name}</span>
+      </td>
+      <td class="p-3 text-xs text-gray-300">
+        <span class="text-neonCyan font-bold">${row.role}</span>
+        <span class="block text-[10px] opacity-75">${row.dept}</span>
+      </td>
+      <td class="p-3 font-wacky text-electricAqua text-sm">${row.score} / ${row.total}</td>
+      <td class="p-3 font-mono text-xs text-gray-300">${row.timeFormatted}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function exportCSV() {
+  playSound('ding');
+  if (!allLeaderboardEntries.length) {
+    showCustomModal("NO DATA", "There are no recorded attempts to export yet!", "ℹ️");
+    return;
+  }
+
+  const headers = ['Player Name', 'Job Role', 'Department', 'Avatar', 'Score', 'Total Questions', 'Accuracy %', 'Time Taken', 'Time (ms)', 'Completed Date'];
+  const lines = [headers.join(',')];
+
+  allLeaderboardEntries.forEach(r => {
+    const line = [
+      `"${(r.name||'').replace(/"/g, '""')}"`,
+      `"${(r.role||'').replace(/"/g, '""')}"`,
+      `"${(r.dept||'').replace(/"/g, '""')}"`,
+      `"${(r.avatar||'').replace(/"/g, '""')}"`,
+      r.score,
+      r.total,
+      `"${r.accuracy}%"`,
+      `"${r.timeFormatted}"`,
+      r.timeMs,
+      `"${r.dateStr || ''}"`
+    ];
+    lines.push(line.join(','));
+  });
+
+  const csvContent = '\uFEFF' + lines.join('\r\n');
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `Digital_Day_Awareness_Scores_${new Date().toISOString().slice(0,10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+/* ---------------- INTERACTIVE SPRITE REACTIONS ---------------- */
+function pokeSprite(type) {
+  playSound('ding');
+  let el = null;
+  if (type === 'winged') el = document.getElementById('wingedBot');
+  else if (type === 'bee') el = document.getElementById('beeBot');
+  else if (type === 'orb1') el = document.getElementById('orbBot1');
+  else if (type === 'spider') el = document.getElementById('spiderBot');
+  else if (type === 'crystal') {
+    triggerConfetti(20);
+    return;
+  }
+
+  if (el) {
+    el.classList.add('talking');
+    setTimeout(() => el.classList.remove('talking'), 2600);
+  }
+}
+
+/* ---------------- CUSTOM MODAL ---------------- */
+let modalConfirmCallback = null;
+
+function showCustomModal(title, msg, emoji = "⚡", isConfirm = false, onConfirm = null) {
+  playSound('click');
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalMsg').textContent = msg;
+  document.getElementById('modalEmoji').textContent = emoji;
+
+  const actions = document.getElementById('modalActions');
+  actions.innerHTML = '';
+
+  if (isConfirm) {
+    modalConfirmCallback = onConfirm;
+    const cancelBtn = document.createElement('button');
+    cancelBtn.className = 'cyber-btn bg-slate-700 text-white px-5 py-2 text-sm';
+    cancelBtn.textContent = 'CANCEL';
+    cancelBtn.onclick = closeModal;
+
+    const okBtn = document.createElement('button');
+    okBtn.className = 'cyber-btn bg-cyberPink text-white px-5 py-2 text-sm';
+    okBtn.textContent = 'CONFIRM';
+    okBtn.onclick = () => {
+      closeModal();
+      if (modalConfirmCallback) modalConfirmCallback();
+    };
+
+    actions.append(cancelBtn, okBtn);
+  } else {
+    const okBtn = document.createElement('button');
+    okBtn.className = 'cyber-btn bg-electricAqua text-black px-6 py-2.5 text-base';
+    okBtn.textContent = 'ACKNOWLEDGE';
+    okBtn.onclick = closeModal;
+    actions.appendChild(okBtn);
+  }
+
+  const modal = document.getElementById('customModal');
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+}
+
+function closeModal() {
+  const modal = document.getElementById('customModal');
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+}
+
+function showToast(msg) {
+  const toast = document.createElement('div');
+  toast.className = 'fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-neonCyan text-black font-cyber px-5 py-2.5 rounded-2xl border-2 border-white shadow-[0_0_20px_#00f7ff] z-50 text-xs sm:text-sm animate-bounce';
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2600);
+}
+
+/* ---------------- CONFETTI CANVAS ---------------- */
+const confettiCanvas = document.getElementById('confettiCanvas');
+const cctx = confettiCanvas.getContext('2d');
+let confettiPieces = [];
+let confettiAnimationId = null;
+
+function resizeCanvas() {
+  confettiCanvas.width = window.innerWidth;
+  confettiCanvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+function triggerConfetti(count = 50) {
+  const colors = ['#00f7ff', '#ff1493', '#05e6b7', '#ffe600', '#ffffff'];
+  for (let i = 0; i < count; i++) {
+    confettiPieces.push({
+      x: window.innerWidth * (0.2 + Math.random() * 0.6),
+      y: window.innerHeight * 0.4,
+      w: 8 + Math.random() * 8,
+      h: 5 + Math.random() * 8,
+      vx: (Math.random() - 0.5) * 16,
+      vy: -10 - Math.random() * 12,
+      gravity: 0.38 + Math.random() * 0.2,
+      rotation: Math.random() * 360,
+      vRot: (Math.random() - 0.5) * 15,
+      color: colors[Math.floor(Math.random() * colors.length)]
+    });
+  }
+  if (!confettiAnimationId) {
+    updateConfetti();
+  }
+}
+
+function updateConfetti() {
+  cctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+  confettiPieces.forEach((p, idx) => {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += p.gravity;
+    p.rotation += p.vRot;
+
+    cctx.save();
+    cctx.translate(p.x, p.y);
+    cctx.rotate((p.rotation * Math.PI) / 180);
+    cctx.fillStyle = p.color;
+    cctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+    cctx.restore();
+
+    if (p.y > confettiCanvas.height) {
+      confettiPieces.splice(idx, 1);
+    }
+  });
+
+  if (confettiPieces.length > 0) {
+    confettiAnimationId = requestAnimationFrame(updateConfetti);
+  } else {
+    confettiAnimationId = null;
+  }
+}
+
+/* ---------------- INITIAL LOAD ---------------- */
+window.onload = function() {
+  renderAvatarPicker();
+  window.mergeCloudLeaderboard([]);
+  showScreen('splash');
+};
+</script>
+</body>
+</html>
